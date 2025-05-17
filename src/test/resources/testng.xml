@@ -1,0 +1,7 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="uber-smoke-suite" verbose="1" parallel="tests" thread-count="2" configfailurepolicy="continue">
+<suite-files>
+    <suite-file path="api_tests.xml" />
+    <suite-file path="ui_tests.xml" />
+</suite-files>
+</suite>
