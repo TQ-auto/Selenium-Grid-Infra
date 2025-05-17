@@ -1,13 +1,13 @@
-package pages;
+package uitests.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-public class ProfilePage extends BasePage {
+public class PostEditPage extends NewPostCreationPage{
 
-    private final String url = baseUrl + "/resources/Profile";
+    private final String url = baseUrl + "/resources/Post/records/%s/edit";
 
-    public ProfilePage(WebDriver driver) {
+    protected PostEditPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver,this);
     }
@@ -19,11 +19,11 @@ public class ProfilePage extends BasePage {
 
     @Override
     public void waitForPageToLoad() {
-        //@todo
+
     }
 
-    public void navigate() {
-        driver.get(url);
+    public void navigate(String postId) {
+        driver.get(url.formatted(postId));
         waitForPageToLoad();
     }
 }

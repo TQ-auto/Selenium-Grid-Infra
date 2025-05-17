@@ -1,9 +1,9 @@
-package pages;
+package uitests.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pages.bars.LeftSideBar;
-import pages.bars.TopBar;
+import uitests.pages.bars.LeftSideBar;
+import uitests.pages.bars.TopBar;
 
 import java.time.Duration;
 

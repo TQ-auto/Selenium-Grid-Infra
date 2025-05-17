@@ -1,16 +1,15 @@
 package api.endpoints;
 
 import api.payload.Post;
+import api.utils.HttpLogger;
 import okhttp3.*;
-
 import java.io.IOException;
 
 public class PostEndPoints {
 
     public static Response createPost(String cookie, Post postObject) throws IOException {
-        OkHttpClient client = new OkHttpClient().newBuilder()
+        OkHttpClient client = new OkHttpClient().newBuilder().addInterceptor(HttpLogger.getLogger())
                 .build();
-        MediaType mediaType = MediaType.parse("text/plain");
         RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
                 .addFormDataPart("title", postObject.getTitle())
                 .addFormDataPart("content", postObject.getContent())
@@ -32,7 +31,7 @@ public class PostEndPoints {
     }
 
     public static Response editPost(String cookie,Post postObject) throws IOException {
-        OkHttpClient client = new OkHttpClient().newBuilder()
+        OkHttpClient client = new OkHttpClient().newBuilder().addInterceptor(HttpLogger.getLogger())
                 .build();
         RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
                 .addFormDataPart("title", postObject.getTitle())

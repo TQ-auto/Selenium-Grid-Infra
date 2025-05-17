@@ -2,13 +2,14 @@ package api.endpoints;
 
 
 import api.payload.Publisher;
+import api.utils.HttpLogger;
 import okhttp3.*;
 import java.io.IOException;
 
 public class PublisherEndPoints {
 
     public static Response createPublisher(Publisher publisherObject, String cookie) throws IOException {
-        OkHttpClient client = new OkHttpClient().newBuilder()
+        OkHttpClient client = new OkHttpClient().newBuilder().addInterceptor(HttpLogger.getLogger())
                 .build();
         RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
                 .addFormDataPart("name",publisherObject.getPublisherName())

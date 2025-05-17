@@ -587,3 +587,43 @@
 19:32:06.688 [ApplicationImpl pooled thread 20] INFO  c.b.l.BrowserStackRunExtension - Agent path: null
 19:35:12.260 [ApplicationImpl pooled thread 19] INFO  c.b.l.BrowserStackRunExtension - maven
 19:35:12.260 [ApplicationImpl pooled thread 19] INFO  com.browserstack.utils.Helpers - null
+21:18:17.521 [ApplicationImpl pooled thread 5] INFO  c.b.l.BrowserStackRunExtension - testng
+21:18:17.522 [ApplicationImpl pooled thread 5] INFO  com.browserstack.utils.Helpers - null
+21:18:17.523 [ApplicationImpl pooled thread 5] INFO  c.b.l.BrowserStackRunExtension - Agent path: null
+21:18:34.971 [ApplicationImpl pooled thread 5] INFO  c.b.l.BrowserStackRunExtension - testng
+21:18:34.971 [ApplicationImpl pooled thread 5] INFO  com.browserstack.utils.Helpers - null
+21:18:34.971 [ApplicationImpl pooled thread 5] INFO  c.b.l.BrowserStackRunExtension - Agent path: null
+21:18:44.765 [ApplicationImpl pooled thread 5] INFO  c.b.l.BrowserStackRunExtension - maven
+21:18:44.765 [ApplicationImpl pooled thread 5] INFO  com.browserstack.utils.Helpers - null
+21:20:44.872 [ApplicationImpl pooled thread 10] INFO  c.b.l.BrowserStackRunExtension - testng
+21:20:44.872 [ApplicationImpl pooled thread 10] INFO  com.browserstack.utils.Helpers - null
+21:20:44.873 [ApplicationImpl pooled thread 10] INFO  c.b.l.BrowserStackRunExtension - Agent path: null
+21:21:10.856 [ApplicationImpl pooled thread 10] INFO  c.b.l.BrowserStackRunExtension - maven
+21:21:10.857 [ApplicationImpl pooled thread 10] INFO  com.browserstack.utils.Helpers - null
+21:39:18.390 [ApplicationImpl pooled thread 23] INFO  c.b.l.BrowserStackRunExtension - maven
+21:39:18.390 [ApplicationImpl pooled thread 23] INFO  com.browserstack.utils.Helpers - null
+21:39:54.212 [ApplicationImpl pooled thread 28] INFO  c.b.l.BrowserStackRunExtension - maven
+21:39:54.212 [ApplicationImpl pooled thread 28] INFO  com.browserstack.utils.Helpers - null
+21:40:49.738 [ApplicationImpl pooled thread 28] INFO  c.b.l.BrowserStackRunExtension - maven
+21:40:49.738 [ApplicationImpl pooled thread 28] INFO  com.browserstack.utils.Helpers - null
+21:41:28.248 [ApplicationImpl pooled thread 29] INFO  c.b.l.BrowserStackRunExtension - maven
+21:41:28.248 [ApplicationImpl pooled thread 29] INFO  com.browserstack.utils.Helpers - null
+21:44:06.003 [ApplicationImpl pooled thread 30] INFO  c.b.l.BrowserStackRunExtension - testng
+21:44:06.003 [ApplicationImpl pooled thread 30] INFO  com.browserstack.utils.Helpers - null
+21:44:06.005 [ApplicationImpl pooled thread 30] INFO  c.b.l.BrowserStackRunExtension - Agent path: null
+21:45:15.667 [ApplicationImpl pooled thread 30] INFO  c.b.l.BrowserStackRunExtension - testng
+21:45:15.667 [ApplicationImpl pooled thread 30] INFO  com.browserstack.utils.Helpers - null
+21:45:15.669 [ApplicationImpl pooled thread 30] INFO  c.b.l.BrowserStackRunExtension - Agent path: null
+21:47:00.082 [ApplicationImpl pooled thread 32] INFO  c.b.l.BrowserStackRunExtension - testng
+21:47:00.082 [ApplicationImpl pooled thread 32] INFO  com.browserstack.utils.Helpers - null
+21:47:00.084 [ApplicationImpl pooled thread 32] INFO  c.b.l.BrowserStackRunExtension - Agent path: null
+21:53:26.683 [ApplicationImpl pooled thread 34] INFO  c.b.l.BrowserStackRunExtension - maven
+21:53:26.684 [ApplicationImpl pooled thread 34] INFO  com.browserstack.utils.Helpers - null
+21:54:23.371 [ApplicationImpl pooled thread 32] INFO  c.b.l.BrowserStackRunExtension - maven
+21:54:23.371 [ApplicationImpl pooled thread 32] INFO  com.browserstack.utils.Helpers - null
+21:54:48.868 [ApplicationImpl pooled thread 38] INFO  c.b.l.BrowserStackRunExtension - maven
+21:54:48.868 [ApplicationImpl pooled thread 38] INFO  com.browserstack.utils.Helpers - null
+21:59:14.097 [ApplicationImpl pooled thread 38] INFO  c.b.l.BrowserStackRunExtension - maven
+21:59:14.097 [ApplicationImpl pooled thread 38] INFO  com.browserstack.utils.Helpers - null
+22:05:34.559 [ApplicationImpl pooled thread 43] INFO  c.b.l.BrowserStackRunExtension - maven
+22:05:34.559 [ApplicationImpl pooled thread 43] INFO  com.browserstack.utils.Helpers - null

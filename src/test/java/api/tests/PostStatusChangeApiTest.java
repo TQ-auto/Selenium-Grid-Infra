@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import pages.NewPostCreationPage;
+import uitests.pages.NewPostCreationPage;
 
 import java.io.IOException;
 
@@ -37,7 +37,7 @@ public class PostStatusChangeApiTest extends TestApiBase{
         publisherObject.setPublisherName(publisherName);
 
         Response creatPublisherResponse = PublisherEndPoints.createPublisher(publisherObject, cookie);
-        Assert.assertTrue(creatPublisherResponse.isSuccessful());
+        Assert.assertTrue(creatPublisherResponse.isSuccessful(),"Publisher creation failed.");
 
         JSONObject jsonResponse = getJsonObjectOfResponse(creatPublisherResponse);
         publisherId = jsonResponse.getJSONObject("record").getJSONObject("params").getInt("id");
@@ -58,7 +58,7 @@ public class PostStatusChangeApiTest extends TestApiBase{
         postObject.setJsonString(jsonString);
 
         Response createPostResponse = PostEndPoints.createPost(cookie,postObject);
-        Assert.assertEquals(createPostResponse.code(),200);
+        Assert.assertTrue(createPostResponse.isSuccessful(),"Post creation failed.");
 
         JSONObject jsonResponse = getJsonObjectOfResponse(createPostResponse);
         int postId = jsonResponse.getJSONObject("record").getJSONObject("params").getInt("id");
@@ -69,6 +69,8 @@ public class PostStatusChangeApiTest extends TestApiBase{
     public void testChangePostStatusToRemoved() throws IOException {
         postObject.setStatus("REMOVED");
         Response editPostResponse = PostEndPoints.editPost(cookie,postObject);
+        Assert.assertTrue(editPostResponse.isSuccessful(),"Post editing request failed.");
+
         JSONObject jsonResponse = getJsonObjectOfResponse(editPostResponse);
         String postStatus = jsonResponse.getJSONObject("record").getJSONObject("params").getString("status");
         Assert.assertEquals(

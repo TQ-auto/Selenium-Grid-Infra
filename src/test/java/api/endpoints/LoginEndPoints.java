@@ -1,15 +1,17 @@
 package api.endpoints;
 
+import api.utils.HttpLogger;
 import okhttp3.*;
 import java.io.IOException;
 
 public class LoginEndPoints {
 
     public static Response login(String email,String password, String cookie) throws IOException {
-        OkHttpClient client = new OkHttpClient().newBuilder()
+        OkHttpClient client = new OkHttpClient().newBuilder().addInterceptor(HttpLogger.getLogger())
                 .build();
         MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
         RequestBody body = RequestBody.create("email=%s&password=%s".formatted(email,password),mediaType);
+
         Request request = new Request.Builder()
                 .url(Routes.POST_ADMIN_LOGIN_URL)
                 .method("POST", body)
