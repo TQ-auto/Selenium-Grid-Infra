@@ -32,7 +32,6 @@ public class AdminPage extends BasePage{
         webdriverWait.until(ExpectedConditions.textToBePresentInElement(messageTitle,"Welcome"));
     }
 
-
     public void navigate() {
         driver.get(url);
         waitForPageToLoad();

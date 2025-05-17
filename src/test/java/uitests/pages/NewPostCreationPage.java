@@ -122,7 +122,6 @@ public class NewPostCreationPage extends BasePage{
         return clickSaveButton();
     }
 
-
     public String getUrl(){
         return url;
     }

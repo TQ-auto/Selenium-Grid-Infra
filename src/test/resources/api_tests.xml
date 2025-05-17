@@ -5,7 +5,7 @@
         <classes>
             <class name="api.tests.PostStatusChangeApiTest">
                 <parameter name="publisherName" value="apitest"/>
-                <parameter name="publisherEmail" value="apitest@mail.com"/>
+                <parameter name="publisherEmail" value="apitest1@mail.com"/>
                 <parameter name="postTitle" value="TestPost"/>
                 <parameter name="postStatus" value="ACTIVE"/>
                 <parameter name="postPublished" value="true"/>

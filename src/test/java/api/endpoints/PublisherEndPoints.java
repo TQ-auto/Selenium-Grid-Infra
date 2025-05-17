@@ -15,16 +15,11 @@ public class PublisherEndPoints {
                 .addFormDataPart("name",publisherObject.getPublisherName())
                 .addFormDataPart("email",publisherObject.getPublisherEmail())
                 .build();
+
         Request request = new Request.Builder()
                 .url(Routes.POST_PUBLISHER_URL)
                 .method("POST", body)
-                .addHeader("Accept", "application/json, text/plain, */*")
-                .addHeader("Content-Length", "245")
-                .addHeader("Content-Type", "multipart/form-data; boundary=----WebKitFormBoundaryjQaxMEAkAj27seSz")
                 .addHeader("Cookie", cookie)
-                .addHeader("Host", Routes.HOST)
-                .addHeader("Origin", Routes.ORIGIN)
-                .addHeader("Referer", Routes.POST_PUBLISHER_URL)
                 .build();
 
         return client.newCall(request).execute();

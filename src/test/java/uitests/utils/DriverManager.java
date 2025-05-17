@@ -12,7 +12,6 @@ public class DriverManager {
 
     private static WebDriver driver;
     private static final String CHROME_DRIVER_PATH = "\\src\\test\\resources\\chromedriver.exe";
-    //private static final String FIREFOX_DRIVER_PATH = "/resources/geckodriver.exe";
     private static final String EDGE_DRIVER_PATH = "\\src\\test\\resources\\msedgedriver.exe";
 
     public static void initializeDriverToRunLocally(String browser) throws Exception {
