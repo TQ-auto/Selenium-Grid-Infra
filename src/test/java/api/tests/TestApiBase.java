@@ -12,7 +12,7 @@ public class TestApiBase {
 
     final String adminEmail = "admin@example.com";
     final String adminPassword = "password";
-    final String cookie = "adminjs=s%3ADnISaux-bVDFidhEC-0Dub9dy8nvGjKt.vxTQOd%2BDo1WLBbEOR%2F%2FLBjq7DhHT75at56Sbva4wK2s";
+    final String cookie = "adminjs=s%3A_d_AjjnynBD0P5MzhrCh1hS0PrrAoNAx.81QgJf7wpBgd9WXb7bRCjoZh8m9oRuyFp2NYyyV0T6c";
 
     @BeforeClass
     public void login() throws IOException {
