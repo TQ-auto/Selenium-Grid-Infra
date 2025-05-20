@@ -71,12 +71,6 @@
                         <file>src/test/resources/ui_tests.xml</file>
                         <file>src/test/resources/api_tests.xml</file>
                     </suiteXmlFiles>
-                    <properties>
-                        <property>
-                            <name>suitethreadpoolsize</name>
-                            <value>2</value>
-                        </property>
-                    </properties>
                 </configuration>
             </plugin>
         </plugins>
