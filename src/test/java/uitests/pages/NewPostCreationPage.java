@@ -48,10 +48,10 @@ public class NewPostCreationPage extends BasePage{
     public void selectStatus(PostStatus postStatus){
         statusDropdown.click();
         switch (postStatus){
-            case PostStatus.ACTIVE:
+            case ACTIVE:
                 driver.findElement(By.xpath("//div[contains(text(),'ACTIVE')]")).click();
                 break;
-            case PostStatus.REMOVED:
+            case REMOVED:
                 driver.findElement(By.xpath("//div[contains(text(),'REMOVED')]")).click();
                 break;
         }
