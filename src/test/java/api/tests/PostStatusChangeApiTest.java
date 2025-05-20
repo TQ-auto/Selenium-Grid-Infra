@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import uitests.pages.NewPostCreationPage;
+import ui.pages.NewPostCreationPage;
 
 import java.io.IOException;
 

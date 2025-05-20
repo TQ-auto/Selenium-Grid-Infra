@@ -1,4 +1,4 @@
-package uitests;
+package ui.tests;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -7,13 +7,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
-import uitests.utils.DriverManager;
+import ui.utils.DriverManager;
 
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public abstract class TestBase {
 
@@ -21,10 +26,12 @@ public abstract class TestBase {
     String adminTestEmail = "admin@example.com";
     String adminPassword = "password";
     WebDriverWait webdriverWait;
+    Logger logger;
 
     @BeforeTest
     @Parameters("browser")
     protected void setupTestBase(@Optional("chrome")String browser) throws Exception {
+        setLogger();
         DriverManager.initializeDriverToRunLocally(browser);
         if(getDriver() == null){
             throw new Exception("Driver was not initialized");
@@ -59,6 +66,14 @@ public abstract class TestBase {
                                 java.time.LocalDateTime.now().atZone(ZoneId.systemDefault()).format(dateTimeFormatter),
                                 testName)
                 ));
+    }
+
+    private void setLogger() throws IOException {
+        logger = Logger.getLogger("");
+        logger.setLevel(Level.INFO);
+        Arrays.stream(logger.getHandlers()).forEach(handler -> handler.setLevel(Level.INFO));
+        Handler handler = new FileHandler("selenium.xml");
+        logger.addHandler(handler);
     }
 
 }

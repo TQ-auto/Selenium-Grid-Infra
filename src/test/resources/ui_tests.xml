@@ -3,7 +3,7 @@
 <suite name="UiTests">
     <test name="E2E UI">
         <classes>
-            <class name="uitests.PostStatusChangeTest">
+            <class name="ui.tests.PostStatusChangeTest">
                 <parameter name="publisherName" value="uitest"/>
                 <parameter name="publisherEmail" value="uitest@mail.com"/>
                 <parameter name="postTitle" value="TestPost"/>

@@ -1,4 +1,4 @@
-package uitests.pages.bars;
+package ui.pages.bars;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

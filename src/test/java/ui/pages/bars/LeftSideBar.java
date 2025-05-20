@@ -1,4 +1,4 @@
-package uitests.pages.bars;
+package ui.pages.bars;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,9 +9,9 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import uitests.pages.PostPage;
-import uitests.pages.ProfilePage;
-import uitests.pages.PublisherPage;
+import ui.pages.PostPage;
+import ui.pages.ProfilePage;
+import ui.pages.PublisherPage;
 
 import java.time.Duration;
 
