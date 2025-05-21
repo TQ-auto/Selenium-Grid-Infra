@@ -8,7 +8,7 @@ import org.testng.annotations.BeforeClass;
 
 import java.io.IOException;
 
-public class TestApiBase {
+public abstract class TestApiBase {
 
     final String adminEmail = "admin@example.com";
     final String adminPassword = "password";
@@ -22,9 +22,4 @@ public class TestApiBase {
         Assert.assertTrue(responseBodyString.contains("root.render(AdminJS.Application)"));
     }
 
-
-    public static JSONObject getJsonObjectOfResponse(Response response) throws IOException {
-        String responseBody = response.body().string();
-        return new JSONObject(responseBody);
-    }
 }

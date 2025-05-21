@@ -8,7 +8,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import ui.utils.DriverManager;
-
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
@@ -47,7 +46,7 @@ public abstract class TestBase {
         }
     }
 
-    @AfterClass
+    @AfterTest
     protected void wrapUp(){
         getDriver().quit();
     }

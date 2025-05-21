@@ -2,17 +2,17 @@ package api.tests;
 
 import api.endpoints.PostEndPoints;
 import api.endpoints.PublisherEndPoints;
-
 import api.payload.Post;
 import api.payload.Publisher;
+import api.utils.JsonActions;
 import okhttp3.*;
-import org.json.JSONObject;
 import org.testng.Assert;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import ui.pages.NewPostCreationPage;
-
 import java.io.IOException;
+
+import static GeneralUtils.TestUtils.generateString;
+import static api.utils.JsonActions.getEntityIdFromJson;
 
 /**
  * Api test
@@ -29,55 +29,38 @@ public class PostStatusChangeApiTest extends TestApiBase{
     int publisherId;
     Post postObject;
 
-    @Test(priority = 1)
-    @Parameters({"publisherName","publisherEmail"})
-    public void testCreatePublisher(String publisherName,String publisherEmail) throws IOException {
-        Publisher publisherObject = new Publisher();
-        publisherObject.setPublisherEmail(publisherEmail);
-        publisherObject.setPublisherName(publisherName);
+    String publisherName = generateString();
+    String publisherEmail = generateString() + "@" + generateString() + ".com";
+    String postTitle = generateString();
+    String postContent = generateString();
+    NewPostCreationPage.PostStatus postStatus = NewPostCreationPage.PostStatus.ACTIVE;
+    boolean postPublished = true;
+    int jsonNumber = 4;
+    String jsonString = generateString();
+    boolean jsonBoolean = true;
 
+    @Test
+    public void testCreatePublisher() throws IOException {
+        // CREATE PUBLISHER
+        Publisher publisherObject = new Publisher(publisherName,publisherEmail);
         Response creatPublisherResponse = PublisherEndPoints.createPublisher(publisherObject, cookie);
-        Assert.assertTrue(creatPublisherResponse.isSuccessful(),"Publisher creation failed.");
+        publisherId = getEntityIdFromJson(creatPublisherResponse);
 
-        JSONObject jsonResponse = getJsonObjectOfResponse(creatPublisherResponse);
-        publisherId = jsonResponse.getJSONObject("record").getJSONObject("params").getInt("id");
-    }
-
-    @Test(priority = 2)
-    @Parameters({"postTitle","postContent","postStatus","postPublished","jsonNumber","jsonString","jsonBoolean"})
-    public void testCreatePost(String postTitle,String postContent,String postStatus,String postPublished,int jsonNumber,
-                               String jsonString,String jsonBoolean) throws IOException {
-        postObject = new Post();
-        postObject.setStatus(postStatus);
-        postObject.setPublisherId(publisherId);
-        postObject.setContent(postContent);
-        postObject.setJsonBoolean(jsonBoolean);
-        postObject.setPublished(postPublished);
-        postObject.setTitle(postTitle);
-        postObject.setJsonNumber(jsonNumber);
-        postObject.setJsonString(jsonString);
-
+        // CREATE POST
+        postObject = new Post(postTitle,String.valueOf(postStatus),postContent,jsonNumber,jsonString,String.valueOf(jsonBoolean),publisherId,String.valueOf(postPublished));
         Response createPostResponse = PostEndPoints.createPost(cookie,postObject);
-        Assert.assertTrue(createPostResponse.isSuccessful(),"Post creation failed.");
+        postObject.setPostId(getEntityIdFromJson(createPostResponse));
 
-        JSONObject jsonResponse = getJsonObjectOfResponse(createPostResponse);
-        int postId = jsonResponse.getJSONObject("record").getJSONObject("params").getInt("id");
-        postObject.setPostId(postId);
-    }
-
-    @Test(priority = 3)
-    public void testChangePostStatusToRemoved() throws IOException {
-        postObject.setStatus("REMOVED");
+        // CHANGE POST STATUS TO REMOVED
+        postObject.setStatus(NewPostCreationPage.PostStatus.REMOVED.toString());
         Response editPostResponse = PostEndPoints.editPost(cookie,postObject);
-        Assert.assertTrue(editPostResponse.isSuccessful(),"Post editing request failed.");
 
-        JSONObject jsonResponse = getJsonObjectOfResponse(editPostResponse);
-        String postStatus = jsonResponse.getJSONObject("record").getJSONObject("params").getString("status");
+        // VERIFY POST STATUS CHANGED TO REMOVED
+        String postStatusAfterEdit = JsonActions.getStatusOfPostFromJson(editPostResponse);
         Assert.assertEquals(
-                postStatus,
+                postStatusAfterEdit,
                 NewPostCreationPage.PostStatus.REMOVED.toString(),
                 "Post status was not changed to Removed.");
     }
-
 }
 

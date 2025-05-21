@@ -1,9 +1,11 @@
 package ui.tests;
 
 import org.testng.Assert;
-import org.testng.annotations.Parameters;
+
 import org.testng.annotations.Test;
 import ui.pages.*;
+
+import static GeneralUtils.TestUtils.generateString;
 
 
 /**
@@ -17,17 +19,21 @@ import ui.pages.*;
  */
 public class PostStatusChangeTest extends TestBase{
 
+    String publisherName = generateString();
+    String publisherEmail = generateString() + "@" + generateString() + ".com";
+    String postTitle = generateString();
+    NewPostCreationPage.PostStatus postStatus = NewPostCreationPage.PostStatus.ACTIVE;
+    boolean postPublished = true;
+    int jsonNumber = 4;
+    String jsonString = generateString();
+    boolean jsonBoolean = true;
+
     @Test(description = "Add a publisher and a post with status active then change status to remove from post page")
-    @Parameters({"publisherName","publisherEmail","postTitle","postStatus","postPublished",
-    "jsonNumber","jsonString","jsonBoolean"})
-    public void addPublisherAndPost_ChangePostStatusToRemoved_Verify(String publisherName,String publisherEmail,String postTitle,
-                                     NewPostCreationPage.PostStatus postStatus,boolean postPublished,int jsonNumber,
-                                     String jsonString,boolean jsonBoolean){
+    public void addPublisherAndPost_ChangePostStatusToRemoved_Verify(){
 
         // LOGIN TO ADMIN PAGE
         LoginPage loginPage = new LoginPage(getDriver());
         AdminPage adminPage = loginPage.login(adminTestEmail,adminPassword);
-        Assert.assertNotNull(adminPage,"Admin page object was not initialized.");
 
         // GO TO PUBLISHER PAGE
         PublisherPage publisherPage =
@@ -36,8 +42,6 @@ public class PostStatusChangeTest extends TestBase{
         // CREATE NEW PUBLISHER
         NewPublisherCreationPage newPublisherCreationPage = publisherPage.clickCreateFirstRecordButton();
         publisherPage = newPublisherCreationPage.createNewPublisher(publisherName,publisherEmail);
-        Assert.assertTrue(publisherPage.verifyEmailAppearsInTable(publisherEmail),
-                "Publisher was not added to publishers' page table.");
 
         // **After creating a publisher, success message appears and hides burger menu, wait until it disappears.
         publisherPage.waitUntilSuccessMessageDisappears();

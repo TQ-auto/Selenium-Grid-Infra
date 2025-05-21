@@ -3,16 +3,7 @@
 <suite name="UiTests">
     <test name="E2E UI">
         <classes>
-            <class name="ui.tests.PostStatusChangeTest">
-                <parameter name="publisherName" value="uitest"/>
-                <parameter name="publisherEmail" value="uitest@mail.com"/>
-                <parameter name="postTitle" value="TestPost"/>
-                <parameter name="postStatus" value="ACTIVE"/>
-                <parameter name="postPublished" value="true"/>
-                <parameter name="jsonNumber" value="25"/>
-                <parameter name="jsonString" value="Testing"/>
-                <parameter name="jsonBoolean" value="true"/>
-            </class>
+            <class name="ui.tests.PostStatusChangeTest"/>
         </classes>
     </test>
 </suite>

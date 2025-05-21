@@ -3,17 +3,7 @@
 <suite name="API Tests">
     <test name="E2E api">
         <classes>
-            <class name="api.tests.PostStatusChangeApiTest">
-                <parameter name="publisherName" value="apitest"/>
-                <parameter name="publisherEmail" value="apitest1@mail.com"/>
-                <parameter name="postTitle" value="TestPost"/>
-                <parameter name="postStatus" value="ACTIVE"/>
-                <parameter name="postPublished" value="true"/>
-                <parameter name="postContent" value="asdjdsj ajsdajsd asd"/>
-                <parameter name="jsonNumber" value="25"/>
-                <parameter name="jsonString" value="Testing"/>
-                <parameter name="jsonBoolean" value="true"/>
-            </class>
+            <class name="api.tests.PostStatusChangeApiTest"/>
         </classes>
     </test>
 </suite>

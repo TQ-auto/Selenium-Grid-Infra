@@ -12,6 +12,29 @@ public class Post {
     int publisherId;
     String published;
 
+    public Post(String title, String status, String content, int jsonNumber, String jsonString, String jsonBoolean, int publisherId, String published) {
+        this.title = title;
+        this.status = status;
+        this.content = content;
+        this.jsonNumber = jsonNumber;
+        this.jsonString = jsonString;
+        this.jsonBoolean = jsonBoolean;
+        this.publisherId = publisherId;
+        this.published = published;
+    }
+
+    public Post(int postId, String title, String content, String status, String jsonString, int jsonNumber, String jsonBoolean, int publisherId, String published) {
+        this.postId = postId;
+        this.title = title;
+        this.content = content;
+        this.status = status;
+        this.jsonString = jsonString;
+        this.jsonNumber = jsonNumber;
+        this.jsonBoolean = jsonBoolean;
+        this.publisherId = publisherId;
+        this.published = published;
+    }
+
     public int getPostId() {
         return postId;
     }

@@ -5,6 +5,11 @@ public class Publisher {
     String publisherName;
     String publisherEmail;
 
+    public Publisher(String publisherName, String publisherEmail) {
+        this.publisherName = publisherName;
+        this.publisherEmail = publisherEmail;
+    }
+
     public String getPublisherName() {
         return publisherName;
     }
