@@ -7,7 +7,6 @@ import java.io.IOException;
 
 public class JsonActions {
 
-
     public static JSONObject getJsonObjectOfResponse(Response response) throws IOException {
         String responseBody = response.body().string();
         return new JSONObject(responseBody);
@@ -22,5 +21,11 @@ public class JsonActions {
     public static String getStatusOfPostFromJson(Response response) throws IOException {
         JSONObject jsonResponse = getJsonObjectOfResponse(response);
         return jsonResponse.getJSONObject("record").getJSONObject("params").getString("status");
+    }
+
+    //Get deletion response message
+    public static String getNoticeMessageOfDeletionFromJson(Response response) throws IOException {
+        JSONObject jsonResponse = getJsonObjectOfResponse(response);
+        return jsonResponse.getJSONObject("notice").getString("message");
     }
 }

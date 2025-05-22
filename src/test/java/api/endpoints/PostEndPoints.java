@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class PostEndPoints {
 
-    public static Response createPost(String cookie, Post postObject) throws IOException {
+    public static Response createPost(Post postObject) throws IOException {
         OkHttpClient client = new OkHttpClient().newBuilder().addInterceptor(HttpLogger.getLogger())
                 .build();
         RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
@@ -24,13 +24,13 @@ public class PostEndPoints {
         Request request = new Request.Builder()
                 .url(Routes.POST_NEW_POST_URL)
                 .method("POST", body)
-                .addHeader("Cookie", cookie)
+                .addHeader("Cookie", Routes.COOKIE)
                 .build();
 
         return client.newCall(request).execute();
     }
 
-    public static Response editPost(String cookie,Post postObject) throws IOException {
+    public static Response editPost(Post postObject) throws IOException {
         OkHttpClient client = new OkHttpClient().newBuilder().addInterceptor(HttpLogger.getLogger())
                 .build();
         RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
@@ -48,9 +48,23 @@ public class PostEndPoints {
         Request request = new Request.Builder()
                 .url(Routes.EDIT_POST_URL.replace("{id}",String.valueOf(postObject.getPostId())))
                 .method("POST", body)
-                .addHeader("Cookie", cookie)
+                .addHeader("Cookie", Routes.COOKIE)
                 .build();
 
+        return client.newCall(request).execute();
+    }
+
+    public static Response deletePost(int id) throws IOException {
+        OkHttpClient client = new OkHttpClient().newBuilder().addInterceptor(HttpLogger.getLogger())
+                .build();
+        MediaType mediaType = MediaType.parse("text/plain");
+        RequestBody body = RequestBody.create(mediaType, "");
+        Request request = new Request.Builder()
+                .url(Routes.DELETE_POST_URL.replace("{id}",String.valueOf(id)))
+                .method("POST", body)
+                .addHeader("Cookie", Routes.COOKIE)
+                .addHeader("Host", " localhost:3000")
+                .build();
         return client.newCall(request).execute();
     }
 }

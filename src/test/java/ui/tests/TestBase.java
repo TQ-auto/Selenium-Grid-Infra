@@ -1,5 +1,6 @@
 package ui.tests;
 
+import GeneralUtils.TestUtils;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -14,6 +15,7 @@ import java.time.Duration;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.Stack;
 import java.util.logging.FileHandler;
 import java.util.logging.Handler;
 import java.util.logging.Level;
@@ -26,6 +28,8 @@ public abstract class TestBase {
     String adminPassword = "password";
     WebDriverWait webdriverWait;
     Logger logger;
+    // Saves objects to be deleted at the end of each test.
+    Stack<Object> deletionStack = new Stack<>();
 
     @BeforeTest
     @Parameters("browser")
@@ -49,6 +53,11 @@ public abstract class TestBase {
     @AfterTest
     protected void wrapUp(){
         getDriver().quit();
+    }
+
+    @AfterTest
+    public void cleanup() throws IOException {
+        TestUtils.cleanup(deletionStack);
     }
 
     public WebDriver getDriver(){

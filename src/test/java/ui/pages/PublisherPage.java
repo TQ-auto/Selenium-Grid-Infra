@@ -13,10 +13,8 @@ public class PublisherPage extends BasePage {
 
     private final String url = baseUrl + "/resources/Publisher";
 
-    // The button in the ActionHeader section
     @FindBy(how = How.XPATH, using = "//a[@href='/admin/resources/Publisher/actions/new']")
     WebElement createFirstRecordButtonHeader;
-
 
     public PublisherPage(WebDriver driver) {
         super(driver);

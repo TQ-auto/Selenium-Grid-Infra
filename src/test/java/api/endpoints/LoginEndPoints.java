@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class LoginEndPoints {
 
-    public static Response login(String email,String password, String cookie) throws IOException {
+    public static Response login(String email,String password) throws IOException {
         OkHttpClient client = new OkHttpClient().newBuilder().addInterceptor(HttpLogger.getLogger())
                 .build();
         MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
@@ -23,7 +23,7 @@ public class LoginEndPoints {
                 .addHeader("Content-Length", "43")
                 .addHeader("Content-Type", "application/x-www-form-urlencoded")
                 .addHeader("Host", Routes.HOST)
-                .addHeader("Cookie", cookie)
+                .addHeader("Cookie", Routes.COOKIE)
                 .build();
 
         return client.newCall(request).execute();

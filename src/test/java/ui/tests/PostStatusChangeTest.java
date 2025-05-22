@@ -42,8 +42,7 @@ public class PostStatusChangeTest extends TestBase{
         // CREATE NEW PUBLISHER
         NewPublisherCreationPage newPublisherCreationPage = publisherPage.clickCreateFirstRecordButton();
         publisherPage = newPublisherCreationPage.createNewPublisher(publisherName,publisherEmail);
-
-        // **After creating a publisher, success message appears and hides burger menu, wait until it disappears.
+        // After creating a publisher, success message appears and hides burger menu, wait until it disappears.
         publisherPage.waitUntilSuccessMessageDisappears();
 
         // CREATE NEW POST AND LINK TO THE PUBLISHER

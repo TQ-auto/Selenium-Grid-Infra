@@ -26,7 +26,6 @@ import static api.utils.JsonActions.getEntityIdFromJson;
 
 public class PostStatusChangeApiTest extends TestApiBase{
 
-    int publisherId;
     Post postObject;
 
     String publisherName = generateString();
@@ -43,17 +42,19 @@ public class PostStatusChangeApiTest extends TestApiBase{
     public void testCreatePublisher() throws IOException {
         // CREATE PUBLISHER
         Publisher publisherObject = new Publisher(publisherName,publisherEmail);
-        Response creatPublisherResponse = PublisherEndPoints.createPublisher(publisherObject, cookie);
-        publisherId = getEntityIdFromJson(creatPublisherResponse);
+        Response creatPublisherResponse = PublisherEndPoints.createPublisher(publisherObject);
+        publisherObject.setPublisherId(getEntityIdFromJson(creatPublisherResponse));
+        deletionStack.push(publisherObject);
 
         // CREATE POST
-        postObject = new Post(postTitle,String.valueOf(postStatus),postContent,jsonNumber,jsonString,String.valueOf(jsonBoolean),publisherId,String.valueOf(postPublished));
-        Response createPostResponse = PostEndPoints.createPost(cookie,postObject);
+        postObject = new Post(postTitle,String.valueOf(postStatus),postContent,jsonNumber,jsonString,String.valueOf(jsonBoolean),publisherObject.getPublisherId(),String.valueOf(postPublished));
+        Response createPostResponse = PostEndPoints.createPost(postObject);
         postObject.setPostId(getEntityIdFromJson(createPostResponse));
+        deletionStack.push(postObject);
 
         // CHANGE POST STATUS TO REMOVED
         postObject.setStatus(NewPostCreationPage.PostStatus.REMOVED.toString());
-        Response editPostResponse = PostEndPoints.editPost(cookie,postObject);
+        Response editPostResponse = PostEndPoints.editPost(postObject);
 
         // VERIFY POST STATUS CHANGED TO REMOVED
         String postStatusAfterEdit = JsonActions.getStatusOfPostFromJson(editPostResponse);
