@@ -1,6 +1,6 @@
 package ui.tests;
 
-import GeneralUtils.TestUtils;
+import generalutils.TestUtils;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;

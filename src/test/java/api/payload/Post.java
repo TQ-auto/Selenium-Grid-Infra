@@ -1,18 +1,20 @@
 package api.payload;
 
+import ui.pages.NewPostCreationPage;
+
 public class Post {
 
     int postId;
     String title;
-    String status;
+    NewPostCreationPage.PostStatus status;
     String content;
     int jsonNumber;
     String jsonString;
-    String jsonBoolean;
+    boolean jsonBoolean;
     int publisherId;
-    String published;
+    boolean published;
 
-    public Post(String title, String status, String content, int jsonNumber, String jsonString, String jsonBoolean, int publisherId, String published) {
+    public Post(String title, NewPostCreationPage.PostStatus status, String content, int jsonNumber, String jsonString, boolean jsonBoolean, int publisherId, boolean published) {
         this.title = title;
         this.status = status;
         this.content = content;
@@ -23,7 +25,18 @@ public class Post {
         this.published = published;
     }
 
-    public Post(int postId, String title, String content, String status, String jsonString, int jsonNumber, String jsonBoolean, int publisherId, String published) {
+    public Post(String title, NewPostCreationPage.PostStatus status, String content, int jsonNumber, String jsonString, boolean jsonBoolean, boolean published) {
+        this.title = title;
+        this.status = status;
+        this.content = content;
+        this.jsonNumber = jsonNumber;
+        this.jsonString = jsonString;
+        this.jsonBoolean = jsonBoolean;
+        this.published = published;
+    }
+
+
+    public Post(int postId, String title, String content, NewPostCreationPage.PostStatus status, String jsonString, int jsonNumber, boolean jsonBoolean, int publisherId, boolean published) {
         this.postId = postId;
         this.title = title;
         this.content = content;
@@ -67,11 +80,11 @@ public class Post {
         this.jsonString = jsonString;
     }
 
-    public String getStatus() {
+    public NewPostCreationPage.PostStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(NewPostCreationPage.PostStatus status) {
         this.status = status;
     }
 
@@ -83,11 +96,11 @@ public class Post {
         this.content = content;
     }
 
-    public String getJsonBoolean() {
+    public boolean getJsonBoolean() {
         return jsonBoolean;
     }
 
-    public void setJsonBoolean(String jsonBoolean) {
+    public void setJsonBoolean(boolean jsonBoolean) {
         this.jsonBoolean = jsonBoolean;
     }
 
@@ -99,11 +112,11 @@ public class Post {
         this.publisherId = publisherId;
     }
 
-    public String getPublished() {
+    public boolean getPublished() {
         return published;
     }
 
-    public void setPublished(String published) {
+    public void setPublished(boolean published) {
         this.published = published;
     }
 }

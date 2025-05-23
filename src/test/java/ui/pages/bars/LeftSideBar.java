@@ -3,7 +3,6 @@ package ui.pages.bars;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
@@ -21,23 +20,18 @@ public class LeftSideBar {
     WebDriverWait webdriverWait;
 
     @FindBy(how = How.XPATH, using = "//a[@data-css='sidebar-logo']")
-    @CacheLookup
     WebElement unityLogoButton;
 
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'Happy Folder')]/parent::a")
-    @CacheLookup
     WebElement happyFolderMenuButton;
 
     @FindBy(how = How.XPATH, using = "//a[@href='/admin/resources/Publisher']")
-    @CacheLookup
     WebElement publisherButton;
 
     @FindBy(how = How.XPATH, using = "//a[@href='/admin/resources/Profile']")
-    @CacheLookup
     WebElement profileButton;
 
     @FindBy(how = How.XPATH, using = "//a[@href='/admin/resources/Post']")
-    @CacheLookup
     WebElement postButton;
 
     public LeftSideBar(WebDriver driver){

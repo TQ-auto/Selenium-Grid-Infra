@@ -1,11 +1,12 @@
 package ui.tests;
 
+import api.payload.Post;
+import api.payload.Publisher;
 import org.testng.Assert;
-
 import org.testng.annotations.Test;
 import ui.pages.*;
 
-import static GeneralUtils.TestUtils.generateString;
+import static generalutils.TestUtils.*;
 
 
 /**
@@ -18,15 +19,6 @@ import static GeneralUtils.TestUtils.generateString;
  * Step 6: Validate post status was changed to Remove from the Post page
  */
 public class PostStatusChangeTest extends TestBase{
-
-    String publisherName = generateString();
-    String publisherEmail = generateString() + "@" + generateString() + ".com";
-    String postTitle = generateString();
-    NewPostCreationPage.PostStatus postStatus = NewPostCreationPage.PostStatus.ACTIVE;
-    boolean postPublished = true;
-    int jsonNumber = 4;
-    String jsonString = generateString();
-    boolean jsonBoolean = true;
 
     @Test(description = "Add a publisher and a post with status active then change status to remove from post page")
     public void addPublisherAndPost_ChangePostStatusToRemoved_Verify(){
@@ -41,10 +33,12 @@ public class PostStatusChangeTest extends TestBase{
 
         // CREATE NEW PUBLISHER
         NewPublisherCreationPage newPublisherCreationPage = publisherPage.clickCreateFirstRecordButton();
-        publisherPage = newPublisherCreationPage.createNewPublisher(publisherName,publisherEmail);
+        Publisher publisherObject = getGeneratedPublisherDetails();
+        publisherPage = newPublisherCreationPage.createNewPublisher(publisherObject);
         // After creating a publisher, success message appears and hides burger menu, wait until it disappears.
         publisherPage.waitUntilSuccessMessageDisappears();
 
+        Post postObject = getGeneratedPostDetails();
         // CREATE NEW POST AND LINK TO THE PUBLISHER
         PostPage postPage =
                 publisherPage
@@ -53,7 +47,7 @@ public class PostStatusChangeTest extends TestBase{
                         .openHappyFolder()
                         .clickPostButton()
                         .clickCreateFirstRecordButton()
-                        .createNewPost(postTitle, postStatus,postPublished,publisherEmail,jsonNumber,jsonString,jsonBoolean);
+                        .createNewPost(postObject,publisherObject.getPublisherEmail());
 
         // CHANGE POST STATUS TO REMOVED
         PostShowPage postShowPage = postPage.clickOnLastAddedPost();

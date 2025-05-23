@@ -1,5 +1,6 @@
 package ui.pages;
 
+import api.payload.Post;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -111,13 +112,12 @@ public class NewPostCreationPage extends BasePage{
     }
 
     public PostPage createNewPost(
-            String title, PostStatus postStatus, boolean published, String publisherEmail,
-            int jsonNumber,String jsonString,boolean jsonBoolean){
-        if(published)
+            Post post, String publisherEmail){
+        if(post.getPublished())
             clickCheckBox();
-        enterTitle(title);
-        addJson(jsonNumber,jsonString,jsonBoolean);
-        selectStatus(postStatus);
+        enterTitle(post.getTitle());
+        addJson(post.getJsonNumber(),post.getJsonString(),post.getJsonBoolean());
+        selectStatus(post.getStatus());
         selectPublisher(publisherEmail);
         return clickSaveButton();
     }

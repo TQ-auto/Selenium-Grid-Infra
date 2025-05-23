@@ -1,5 +1,6 @@
 package ui.pages;
 
+import api.payload.Publisher;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -41,9 +42,9 @@ public class NewPublisherCreationPage extends BasePage {
         return publisherPage;
     }
 
-    public PublisherPage createNewPublisher(String name, String email){
-        enterName(name);
-        enterEmail(email);
+    public PublisherPage createNewPublisher(Publisher publisher){
+        enterName(publisher.getPublisherName());
+        enterEmail(publisher.getPublisherEmail());
         return clickSaveButton();
     }
 

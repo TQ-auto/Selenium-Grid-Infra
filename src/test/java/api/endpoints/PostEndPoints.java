@@ -13,12 +13,12 @@ public class PostEndPoints {
         RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
                 .addFormDataPart("title", postObject.getTitle())
                 .addFormDataPart("content", postObject.getContent())
-                .addFormDataPart("status", postObject.getStatus())
+                .addFormDataPart("status", postObject.getStatus().toString())
                 .addFormDataPart("publisher", String.valueOf(postObject.getPublisherId()))
-                .addFormDataPart("published", postObject.getPublished())
+                .addFormDataPart("published", String.valueOf(postObject.getPublished()))
                 .addFormDataPart("someJson.0.string", postObject.getJsonString())
                 .addFormDataPart("someJson.0.number", String.valueOf(postObject.getJsonNumber()))
-                .addFormDataPart("someJson.0.boolean", postObject.getJsonBoolean())
+                .addFormDataPart("someJson.0.boolean", String.valueOf(postObject.getJsonBoolean()))
                 .build();
 
         Request request = new Request.Builder()
@@ -36,12 +36,12 @@ public class PostEndPoints {
         RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
                 .addFormDataPart("title", postObject.getTitle())
                 .addFormDataPart("content", postObject.getContent())
-                .addFormDataPart("status", postObject.getStatus())
+                .addFormDataPart("status", String.valueOf(postObject.getStatus()))
                 .addFormDataPart("publisher", String.valueOf(postObject.getPublisherId()))
-                .addFormDataPart("published", postObject.getPublished())
+                .addFormDataPart("published", String.valueOf(postObject.getPublished()))
                 .addFormDataPart("someJson.0.string", postObject.getJsonString())
                 .addFormDataPart("someJson.0.number", String.valueOf(postObject.getJsonNumber()))
-                .addFormDataPart("someJson.0.boolean", postObject.getJsonBoolean())
+                .addFormDataPart("someJson.0.boolean", String.valueOf(postObject.getJsonBoolean()))
                 .addFormDataPart("id",String.valueOf(postObject.getPostId()))
                 .build();
 

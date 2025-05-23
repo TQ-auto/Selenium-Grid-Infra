@@ -1,6 +1,6 @@
 package api.tests;
 
-import GeneralUtils.TestUtils;
+import generalutils.TestUtils;
 import api.endpoints.LoginEndPoints;
 import okhttp3.*;
 import org.testng.Assert;
@@ -14,7 +14,6 @@ public abstract class TestApiBase {
 
     final String adminEmail = "admin@example.com";
     final String adminPassword = "password";
-    final String deletionMessage = "successfullyDeleted";
 
     // Saves objects to be deleted at the end of each test.
     Stack<Object> deletionStack = new Stack<>();

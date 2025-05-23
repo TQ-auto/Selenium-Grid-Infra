@@ -11,8 +11,8 @@ import org.testng.annotations.Test;
 import ui.pages.NewPostCreationPage;
 import java.io.IOException;
 
-import static GeneralUtils.TestUtils.generateString;
 import static api.utils.JsonActions.getEntityIdFromJson;
+import static generalutils.TestUtils.*;
 
 /**
  * Api test
@@ -26,34 +26,23 @@ import static api.utils.JsonActions.getEntityIdFromJson;
 
 public class PostStatusChangeApiTest extends TestApiBase{
 
-    Post postObject;
-
-    String publisherName = generateString();
-    String publisherEmail = generateString() + "@" + generateString() + ".com";
-    String postTitle = generateString();
-    String postContent = generateString();
-    NewPostCreationPage.PostStatus postStatus = NewPostCreationPage.PostStatus.ACTIVE;
-    boolean postPublished = true;
-    int jsonNumber = 4;
-    String jsonString = generateString();
-    boolean jsonBoolean = true;
-
     @Test
     public void testCreatePublisher() throws IOException {
         // CREATE PUBLISHER
-        Publisher publisherObject = new Publisher(publisherName,publisherEmail);
+        Publisher publisherObject = getGeneratedPublisherDetails();
+
         Response creatPublisherResponse = PublisherEndPoints.createPublisher(publisherObject);
         publisherObject.setPublisherId(getEntityIdFromJson(creatPublisherResponse));
         deletionStack.push(publisherObject);
 
         // CREATE POST
-        postObject = new Post(postTitle,String.valueOf(postStatus),postContent,jsonNumber,jsonString,String.valueOf(jsonBoolean),publisherObject.getPublisherId(),String.valueOf(postPublished));
+        Post postObject = getGeneratedPostDetails(publisherObject.getPublisherId());
         Response createPostResponse = PostEndPoints.createPost(postObject);
         postObject.setPostId(getEntityIdFromJson(createPostResponse));
         deletionStack.push(postObject);
 
         // CHANGE POST STATUS TO REMOVED
-        postObject.setStatus(NewPostCreationPage.PostStatus.REMOVED.toString());
+        postObject.setStatus(NewPostCreationPage.PostStatus.REMOVED);
         Response editPostResponse = PostEndPoints.editPost(postObject);
 
         // VERIFY POST STATUS CHANGED TO REMOVED
