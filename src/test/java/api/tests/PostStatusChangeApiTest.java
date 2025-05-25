@@ -5,10 +5,10 @@ import api.endpoints.PublisherEndPoints;
 import api.payload.Post;
 import api.payload.Publisher;
 import api.utils.JsonActions;
+import enums.PostStatus;
 import okhttp3.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import ui.pages.NewPostCreationPage;
 import java.io.IOException;
 
 import static api.utils.JsonActions.getEntityIdFromJson;
@@ -42,14 +42,14 @@ public class PostStatusChangeApiTest extends TestApiBase{
         deletionStack.push(postObject);
 
         // CHANGE POST STATUS TO REMOVED
-        postObject.setStatus(NewPostCreationPage.PostStatus.REMOVED);
+        postObject.setStatus(PostStatus.REMOVED);
         Response editPostResponse = PostEndPoints.editPost(postObject);
 
         // VERIFY POST STATUS CHANGED TO REMOVED
         String postStatusAfterEdit = JsonActions.getStatusOfPostFromJson(editPostResponse);
         Assert.assertEquals(
                 postStatusAfterEdit,
-                NewPostCreationPage.PostStatus.REMOVED.toString(),
+                PostStatus.REMOVED.toString(),
                 "Post status was not changed to Removed.");
     }
 }

@@ -6,8 +6,7 @@ import api.endpoints.PublisherEndPoints;
 import api.payload.Post;
 import api.payload.Profile;
 import api.payload.Publisher;
-import ui.pages.NewPostCreationPage;
-
+import enums.PostStatus;
 import java.io.IOException;
 import java.util.Random;
 import java.util.Stack;
@@ -32,7 +31,7 @@ public class TestUtils {
     public static Post getGeneratedPostDetails(int publisherId){
         String postTitle = generateRandomString();
         String postContent = generateRandomString();
-        NewPostCreationPage.PostStatus postStatus = NewPostCreationPage.PostStatus.ACTIVE;
+        PostStatus postStatus = PostStatus.ACTIVE;
         int jsonNumber = 4;
         String jsonString = generateRandomString();
         boolean jsonBoolean = true;
@@ -43,7 +42,7 @@ public class TestUtils {
     public static Post getGeneratedPostDetails(){
         String postTitle = generateRandomString();
         String postContent = generateRandomString();
-        NewPostCreationPage.PostStatus postStatus = NewPostCreationPage.PostStatus.ACTIVE;
+        PostStatus postStatus = PostStatus.ACTIVE;
         int jsonNumber = 4;
         String jsonString = generateRandomString();
         boolean jsonBoolean = true;

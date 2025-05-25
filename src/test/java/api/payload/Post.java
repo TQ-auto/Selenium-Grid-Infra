@@ -1,12 +1,13 @@
 package api.payload;
 
+import enums.PostStatus;
 import ui.pages.NewPostCreationPage;
 
 public class Post {
 
     int postId;
     String title;
-    NewPostCreationPage.PostStatus status;
+    PostStatus status;
     String content;
     int jsonNumber;
     String jsonString;
@@ -14,7 +15,7 @@ public class Post {
     int publisherId;
     boolean published;
 
-    public Post(String title, NewPostCreationPage.PostStatus status, String content, int jsonNumber, String jsonString, boolean jsonBoolean, int publisherId, boolean published) {
+    public Post(String title, PostStatus status, String content, int jsonNumber, String jsonString, boolean jsonBoolean, int publisherId, boolean published) {
         this.title = title;
         this.status = status;
         this.content = content;
@@ -25,7 +26,7 @@ public class Post {
         this.published = published;
     }
 
-    public Post(String title, NewPostCreationPage.PostStatus status, String content, int jsonNumber, String jsonString, boolean jsonBoolean, boolean published) {
+    public Post(String title, PostStatus status, String content, int jsonNumber, String jsonString, boolean jsonBoolean, boolean published) {
         this.title = title;
         this.status = status;
         this.content = content;
@@ -36,7 +37,7 @@ public class Post {
     }
 
 
-    public Post(int postId, String title, String content, NewPostCreationPage.PostStatus status, String jsonString, int jsonNumber, boolean jsonBoolean, int publisherId, boolean published) {
+    public Post(int postId, String title, String content, PostStatus status, String jsonString, int jsonNumber, boolean jsonBoolean, int publisherId, boolean published) {
         this.postId = postId;
         this.title = title;
         this.content = content;
@@ -80,11 +81,11 @@ public class Post {
         this.jsonString = jsonString;
     }
 
-    public NewPostCreationPage.PostStatus getStatus() {
+    public PostStatus getStatus() {
         return status;
     }
 
-    public void setStatus(NewPostCreationPage.PostStatus status) {
+    public void setStatus(PostStatus status) {
         this.status = status;
     }
 

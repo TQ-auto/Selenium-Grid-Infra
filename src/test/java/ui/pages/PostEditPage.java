@@ -7,7 +7,7 @@ public class PostEditPage extends NewPostCreationPage{
 
     private final String url = baseUrl + "/resources/Post/records/%s/edit";
 
-    protected PostEditPage(WebDriver driver) {
+    public PostEditPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver,this);
     }
@@ -15,15 +15,5 @@ public class PostEditPage extends NewPostCreationPage{
     @Override
     public String getUrl() {
         return url;
-    }
-
-    @Override
-    public void waitForPageToLoad() {
-
-    }
-
-    public void navigate(String postId) {
-        driver.get(url.formatted(postId));
-        waitForPageToLoad();
     }
 }

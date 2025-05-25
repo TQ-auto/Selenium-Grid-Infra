@@ -2,12 +2,12 @@ package ui.tests;
 
 import api.payload.Post;
 import api.payload.Publisher;
+import enums.PostStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import ui.pages.*;
+import ui.pagesactions.*;
 
 import static generalutils.TestUtils.*;
-
 
 /**
  * Test Scenario 1 - UI (POM)
@@ -24,42 +24,33 @@ public class PostStatusChangeTest extends TestBase{
     public void addPublisherAndPost_ChangePostStatusToRemoved_Verify(){
 
         // LOGIN TO ADMIN PAGE
-        LoginPage loginPage = new LoginPage(getDriver());
-        AdminPage adminPage = loginPage.login(adminTestEmail,adminPassword);
+        AdminPageActions adminPageActions = new LoginPageActions().login(adminTestEmail,adminPassword);
 
         // GO TO PUBLISHER PAGE
-        PublisherPage publisherPage =
-                adminPage.getTopBar().openMenu().openHappyFolder().clickPublisherButton();
+        PublisherPageActions publisherPageActions =
+                adminPageActions.goToPublisherPage();
 
         // CREATE NEW PUBLISHER
-        NewPublisherCreationPage newPublisherCreationPage = publisherPage.clickCreateFirstRecordButton();
         Publisher publisherObject = getGeneratedPublisherDetails();
-        publisherPage = newPublisherCreationPage.createNewPublisher(publisherObject);
-        // After creating a publisher, success message appears and hides burger menu, wait until it disappears.
-        publisherPage.waitUntilSuccessMessageDisappears();
+        publisherPageActions = publisherPageActions.createNewPublisher(publisherObject);
+        publisherPageActions.waitUntilSuccessMessageDisappears();
 
         Post postObject = getGeneratedPostDetails();
         // CREATE NEW POST AND LINK TO THE PUBLISHER
-        PostPage postPage =
-                publisherPage
-                        .getTopBar()
-                        .openMenu()
-                        .openHappyFolder()
-                        .clickPostButton()
-                        .clickCreateFirstRecordButton()
+        PostPageActions postPageActions =
+                publisherPageActions.goToPostPage()
                         .createNewPost(postObject,publisherObject.getPublisherEmail());
 
         // CHANGE POST STATUS TO REMOVED
-        PostShowPage postShowPage = postPage.clickOnLastAddedPost();
-        String postId = postShowPage.getPostId();
-        PostEditPage postEditPage = postShowPage.clickEditButton();
-        postEditPage.selectStatus(NewPostCreationPage.PostStatus.REMOVED);
-        postPage = postEditPage.clickSaveButton();
+        PostShowPageActions postShowPageActions = postPageActions.clickOnLastAddedPost();
+        String postId = postShowPageActions.getPostId();
+        PostEditPageActions postEditPageActions = postShowPageActions.clickEditButton();
+        postPageActions = postEditPageActions.changePostStatus(PostStatus.REMOVED);
 
         //VALIDATE POST STATUS CHANGED IN POST PAGE
         Assert.assertEquals(
-                postPage.getStatusOfPostFromTable(postId),
-                NewPostCreationPage.PostStatus.REMOVED.toString(),
+                postPageActions.getStatusOfPostFromTable(postId),
+                PostStatus.REMOVED.toString(),
                 "Post status was not changed to Removed.");
     }
 }
