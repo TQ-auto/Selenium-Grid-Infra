@@ -8,14 +8,20 @@ import api.payload.Profile;
 import api.payload.Publisher;
 import enums.PostStatus;
 import java.io.IOException;
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Random;
 import java.util.Stack;
 
 public class TestUtils {
 
     // Used to generate random test strings as text inputs
+    public static long getEpochMili(){
+        return Instant.now().toEpochMilli();
+    }
+
     public static String generateRandomString(){
-        return new Random()
+       return new Random()
                 .ints(97,123)
                 .limit(10)
                 .collect(StringBuilder::new, StringBuilder::appendCodePoint,StringBuilder::append)
@@ -23,13 +29,13 @@ public class TestUtils {
     }
 
     public static Publisher getGeneratedPublisherDetails(){
-        String publisherName = generateRandomString();
-        String publisherEmail = generateRandomString() + "@" + generateRandomString() + ".com";
+        String publisherName = "test"+ getEpochMili();
+        String publisherEmail = publisherName + "@email" + ".com";
         return new Publisher(publisherName,publisherEmail);
     }
 
     public static Post getGeneratedPostDetails(int publisherId){
-        String postTitle = generateRandomString();
+        String postTitle = "test post"+ getEpochMili();
         String postContent = generateRandomString();
         PostStatus postStatus = PostStatus.ACTIVE;
         int jsonNumber = 4;

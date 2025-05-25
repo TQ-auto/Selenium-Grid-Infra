@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage extends BasePage{
 
-    String url = baseUrl + "login";
+    String url = baseUrl + "/login";
 
     @FindBy(how = How.XPATH, using = "//input[@name='email']")
     public WebElement emailInput;

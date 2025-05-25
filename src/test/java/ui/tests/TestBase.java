@@ -31,12 +31,11 @@ public abstract class TestBase {
     @Parameters("browser")
     protected void setupTestBase(@Optional("chrome")String browser) throws Exception {
         setLogger();
-        DriverManager.initializeDriverToRunLocally(browser);
+        DriverManager.initializeDriver(browser);
         if(getDriver() == null){
             throw new Exception("Driver was not initialized");
         }
         webdriverWait = new WebDriverWait(getDriver(),Duration.ofSeconds(5));
-        getDriver().get(url);
     }
 
     @AfterMethod
@@ -55,16 +54,15 @@ public abstract class TestBase {
         return DriverManager.getDriver();
     }
 
-    private static void takeScreenshot(WebDriver driver, String testName) throws IOException {
+    private void takeScreenshot(WebDriver driver, String testName) throws IOException {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy,HH-mm-ss-SSS");
         File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(scrFile,
-                new File(
-                        String.format("%s\\screenshots\\%s-%s.png",
-                                System.getProperty("user.dir"),
-                                java.time.LocalDateTime.now().atZone(ZoneId.systemDefault()).format(dateTimeFormatter),
-                                testName)
-                ));
+        String fileName =
+                String.format("%s\\screenshots\\%s-%s.png",
+                System.getProperty("user.dir"),
+                java.time.LocalDateTime.now().atZone(ZoneId.systemDefault()).format(dateTimeFormatter),
+                testName);
+        FileUtils.copyFile(scrFile,new File(fileName));
     }
 
     private void setLogger() throws IOException {

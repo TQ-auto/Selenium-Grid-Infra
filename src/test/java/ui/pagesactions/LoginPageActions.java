@@ -35,9 +35,10 @@ public class LoginPageActions extends ActionsBase {
         return clickLoginButton();
     }
 
-    public void navigate() {
+    public LoginPageActions navigate() {
         DriverManager.getDriver().get(loginPage.getUrl());
         waitForPageToLoad();
+        return new LoginPageActions();
     }
 
     @Override
