@@ -35,21 +35,20 @@ public class PostPageActions extends ActionsBase {
         return DriverManager.getDriver().findElements(By.xpath(xpathPostVerification)).size() == 1;
     }
 
-    public void waitUntilSuccessMessageDisappears(){
-        webDriverWait.until(
-                ExpectedConditions.invisibilityOfElementLocated(
-                        By.xpath("//div[contains(text(),'Successfully')]")
-                )
-        );
-    }
-
-    // todo: Fix method to get real last added post
     public PostShowPageActions clickOnLastAddedPost(){
+        orderPostsTableDesc();
         By lastRowClickableCellLocator = By.cssSelector("tbody tr:last-child td:nth-child(2)");
         webDriverWait.until(ExpectedConditions.presenceOfElementLocated(lastRowClickableCellLocator)).click();
         PostShowPageActions postShowPageActions = new PostShowPageActions();
         postShowPageActions.waitForPageToLoad();
         return postShowPageActions;
+    }
+
+    public void orderPostsTableDesc(){
+        By createdAtBy = By.xpath("//a[contains(text(),'Created At')]");
+        WebElement element = webDriverWait.until(ExpectedConditions.presenceOfElementLocated(createdAtBy));
+        element.click();
+        webDriverWait.until(ExpectedConditions.attributeContains(element,"href","/admin/resources/Post?direction=desc&sortBy=createdAt"));
     }
 
     public String getStatusOfPostFromTable(String postId){

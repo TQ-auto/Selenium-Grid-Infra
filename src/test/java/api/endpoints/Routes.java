@@ -10,7 +10,7 @@ package api.endpoints;
 
 public class Routes {
 
-    public static final String COOKIE = "adminjs=s%3A2lBhnUD-Z8qfdKrI3Z4vhIcxE-y_gPVu.AsbQXMVpWjIpHqk4QKBsbvFzlgbfomeEYy8JXSUZ1SY";
+    public static final String COOKIE = "adminjs=s%3AzMPvYK4Oy5zBaiLkeYWxf3ruIYgcFn51.kU9DCF2l8QQ6QPM51qe7IHWJJRZf5UJ9s8HAGbfpVrw";
 
     public static final String HOST = "localhost:3000";
     public static final String ORIGIN = "http://localhost:3000";

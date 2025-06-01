@@ -3,7 +3,6 @@ package ui.tests;
 import api.payload.Post;
 import api.payload.Publisher;
 import enums.PostStatus;
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ui.pagesactions.*;
@@ -21,9 +20,8 @@ import static generalutils.TestUtils.*;
  */
 public class PostStatusChangeTest extends TestBase{
 
-
     @Test(description = "Add a publisher and a post with status active then change status to remove from post page")
-    public void addPublisherAndPost_ChangePostStatusToRemoved_Verify(){
+    public void addPublisherAndPost_ChangePostStatusToRemoved_Verify() {
 
         // LOGIN TO ADMIN PAGE
         AdminPageActions adminPageActions = new LoginPageActions().navigate().login(adminTestEmail,adminPassword);
@@ -35,7 +33,7 @@ public class PostStatusChangeTest extends TestBase{
         // CREATE NEW PUBLISHER
         Publisher publisherObject = getGeneratedPublisherDetails();
         publisherPageActions = publisherPageActions.createNewPublisher(publisherObject);
-        publisherPageActions.waitUntilSuccessMessageDisappears();
+        publisherPageActions.clickCloseSuccessMessage();
 
         Post postObject = getGeneratedPostDetails();
         // CREATE NEW POST AND LINK TO THE PUBLISHER
@@ -47,8 +45,6 @@ public class PostStatusChangeTest extends TestBase{
         PostShowPageActions postShowPageActions = postPageActions.clickOnLastAddedPost();
         String postId = postShowPageActions.getPostId();
         PostEditPageActions postEditPageActions = postShowPageActions.clickEditButton();
-        JavascriptExecutor js = (JavascriptExecutor) getDriver();
-        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
         postPageActions = postEditPageActions.changePostStatus(PostStatus.REMOVED);
 
         //VALIDATE POST STATUS CHANGED IN POST PAGE

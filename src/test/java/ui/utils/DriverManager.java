@@ -7,6 +7,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.URL;
@@ -16,7 +17,7 @@ public class DriverManager {
     private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     // Used for running UI tests on selenium grid
     private static final String URL = "http://localhost:4444/wd/hub";
-    private static final boolean DEBUG_LOCALLY_FLAG = true;
+    private static final boolean DEBUG_LOCALLY_FLAG = false;
     private static final String CHROME_DRIVER_PATH = "\\src\\test\\resources\\chromedriver.exe";
     private static final String EDGE_DRIVER_PATH = "\\src\\test\\resources\\msedgedriver.exe";
 
@@ -38,10 +39,6 @@ public class DriverManager {
                 System.setProperty("webdriver.chrome.driver", path);
                 ChromeOptions chromeOptions = new ChromeOptions();
                 yield new ChromeDriver(chromeOptions);
-            }
-            case "firefox" -> {
-                FirefoxOptions firefoxOptions = new FirefoxOptions();
-                yield new FirefoxDriver(firefoxOptions);
             }
             case "edge" -> {
                 String path = System.getProperty("user.dir") + EDGE_DRIVER_PATH;

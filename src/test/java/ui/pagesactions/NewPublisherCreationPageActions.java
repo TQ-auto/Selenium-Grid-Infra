@@ -16,10 +16,12 @@ public class NewPublisherCreationPageActions extends ActionsBase{
 
     public void enterName(String name){
         newPublisherCreationPage.nameInput.sendKeys(name);
+        webDriverWait.until(ExpectedConditions.attributeContains(newPublisherCreationPage.nameInput,"value",name));
     }
 
     public void enterEmail(String email){
         newPublisherCreationPage.emailInput.sendKeys(email);
+        webDriverWait.until(ExpectedConditions.attributeContains(newPublisherCreationPage.emailInput,"value",email));
     }
 
     public PublisherPageActions clickSaveButton(){
@@ -29,7 +31,7 @@ public class NewPublisherCreationPageActions extends ActionsBase{
         return publisherPageActions;
     }
 
-    public PublisherPageActions createNewPublisher(Publisher publisher){
+    public PublisherPageActions createNewPublisher(Publisher publisher) {
         enterName(publisher.getPublisherName());
         enterEmail(publisher.getPublisherEmail());
         return clickSaveButton();

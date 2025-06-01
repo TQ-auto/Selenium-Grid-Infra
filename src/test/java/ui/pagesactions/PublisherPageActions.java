@@ -22,7 +22,7 @@ public class PublisherPageActions extends ActionsBase {
         return newPublisherCreationPageActions;
     }
 
-    public PublisherPageActions createNewPublisher(Publisher publisherObject){
+    public PublisherPageActions createNewPublisher(Publisher publisherObject) {
         return clickCreateFirstRecordButton().createNewPublisher(publisherObject);
     }
 
@@ -40,6 +40,12 @@ public class PublisherPageActions extends ActionsBase {
                         By.xpath("//div[contains(text(),'Successfully')]")
                 )
         );
+    }
+
+    public void clickCloseSuccessMessage(){
+        By closeButton = By.xpath("//div[@data-testid='notice-wrapper']//button//span");
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(closeButton)).click();
+        waitUntilSuccessMessageDisappears();
     }
 
     public PostPageActions goToPostPage(){

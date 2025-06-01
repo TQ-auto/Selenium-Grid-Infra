@@ -1,6 +1,7 @@
 package ui.pagesactions;
 
 import enums.PostStatus;
+import org.openqa.selenium.JavascriptExecutor;
 import ui.pages.PostEditPage;
 import ui.utils.DriverManager;
 
@@ -13,6 +14,8 @@ public class PostEditPageActions extends NewPostCreationPageActions {
     }
 
     public PostPageActions changePostStatus(PostStatus postStatus){
+        JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
+        js.executeScript("arguments[0].scrollIntoView(true);",postEditPage.statusDropdown);
         selectStatus(postStatus);
         return clickSaveButton();
     }
