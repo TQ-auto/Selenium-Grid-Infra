@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 
 public abstract class TestBase {
 
-    String url = "http://localhost:3000/admin/";
+    String url = "http://172.22.48.1:3000/admin/";
     String adminTestEmail = "admin@example.com";
     String adminPassword = "password";
     WebDriverWait webdriverWait;

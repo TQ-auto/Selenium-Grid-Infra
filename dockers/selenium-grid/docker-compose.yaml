@@ -11,6 +11,9 @@ services:
       - SE_NODE_MAX_INSTANCES=4
       - SE_NODE_MAX_SESSIONS=4
       - SE_NODE_SESSION_TIMEOUT=60
+    networks:
+      - selenium-net
+      - shared-net
     ports:
       - "9002:5900"
 
@@ -25,8 +28,12 @@ services:
       - SE_NODE_MAX_INSTANCES=1
       - SE_NODE_MAX_SESSIONS=1
       - SE_NODE_SESSION_TIMEOUT=60
+    networks:
+      - selenium-net
+      - shared-net
     ports:
       - "9001:5900"
+
   firefox:
     image: selenium/node-firefox:latest
     depends_on:
@@ -38,6 +45,9 @@ services:
       - SE_NODE_MAX_INSTANCES=1
       - SE_NODE_MAX_SESSIONS=1
       - SE_NODE_SESSION_TIMEOUT=60
+    networks:
+      - selenium-net
+      - shared-net
     ports:
       - "9003:5900"
 
@@ -47,7 +57,15 @@ services:
       - "4442:4442"
       - "4443:4443"
       - "4444:4444"
+    networks:
+      - selenium-net
+      - shared-net
     environment:
       - GRID_MAX_SESSION= 16
       - GRID_BROWSER_TIMEOUT=300
       - GRID_TIMEOUT=300
+
+networks:
+  selenium-net:
+  shared-net:
+    external: true

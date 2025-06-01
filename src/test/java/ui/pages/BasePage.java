@@ -8,7 +8,7 @@ public abstract class BasePage {
 
     WebDriver driver;
     WebDriverWait webdriverWait;
-    protected final String baseUrl = "http://localhost:3000/admin";
+    protected final String baseUrl = "http://172.22.48.1:3000/admin";
 
     protected BasePage(WebDriver driver){
         this.driver = driver;
