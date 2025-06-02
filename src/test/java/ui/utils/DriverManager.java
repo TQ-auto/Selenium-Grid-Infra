@@ -1,5 +1,6 @@
 package ui.utils;
 
+import api.endpoints.Routes;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -14,7 +15,7 @@ public class DriverManager {
 
     private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     // Used for running UI tests on selenium grid
-    private static final String URL = "http://localhost:4444/wd/hub";
+    private static final String URL = Routes.HOST_IP + ":4444/wd/hub";
     private static final boolean DEBUG_LOCALLY_FLAG = false;
     private static final String CHROME_DRIVER_PATH = "\\src\\test\\resources\\chromedriver.exe";
     private static final String EDGE_DRIVER_PATH = "\\src\\test\\resources\\msedgedriver.exe";

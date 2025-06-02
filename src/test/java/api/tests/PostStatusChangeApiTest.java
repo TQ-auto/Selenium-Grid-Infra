@@ -27,7 +27,7 @@ import static generalutils.TestUtils.*;
 public class PostStatusChangeApiTest extends TestApiBase{
 
     @Test
-    public void testCreatePublisher() throws IOException {
+    public void addPublisherAndPost_ChangePostStatusToRemoved_Verify() throws IOException {
         // CREATE PUBLISHER
         Publisher publisherObject = getGeneratedPublisherDetails();
 

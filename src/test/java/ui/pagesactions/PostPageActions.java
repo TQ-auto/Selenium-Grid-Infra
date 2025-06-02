@@ -28,27 +28,22 @@ public class PostPageActions extends ActionsBase {
         return newPostCreationPageActions;
     }
 
-    public boolean verifyPostAppearsInTable(String title){
-        String xpathPostVerification =
-                "//section[@data-testid='property-list-title' and contains(text(),'%s')]".formatted(title);
-
-        return DriverManager.getDriver().findElements(By.xpath(xpathPostVerification)).size() == 1;
-    }
-
     public PostShowPageActions clickOnLastAddedPost(){
-        orderPostsTableDesc();
-        By lastRowClickableCellLocator = By.cssSelector("tbody tr:last-child td:nth-child(2)");
+        orderPostsTableAsc();
+        By lastRowClickableCellLocator = By.cssSelector("tbody tr:first-child td:nth-child(2)");
         webDriverWait.until(ExpectedConditions.presenceOfElementLocated(lastRowClickableCellLocator)).click();
         PostShowPageActions postShowPageActions = new PostShowPageActions();
         postShowPageActions.waitForPageToLoad();
         return postShowPageActions;
     }
 
-    public void orderPostsTableDesc(){
+    public void orderPostsTableAsc(){
         By createdAtBy = By.xpath("//a[contains(text(),'Created At')]");
         WebElement element = webDriverWait.until(ExpectedConditions.presenceOfElementLocated(createdAtBy));
         element.click();
         webDriverWait.until(ExpectedConditions.attributeContains(element,"href","/admin/resources/Post?direction=desc&sortBy=createdAt"));
+        element.click();
+        webDriverWait.until(ExpectedConditions.attributeContains(element,"href","/admin/resources/Post?direction=asc&sortBy=createdAt"));
     }
 
     public String getStatusOfPostFromTable(String postId){

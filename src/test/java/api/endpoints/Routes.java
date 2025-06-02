@@ -12,12 +12,13 @@ public class Routes {
 
     public static final String COOKIE = "adminjs=s%3AzMPvYK4Oy5zBaiLkeYWxf3ruIYgcFn51.kU9DCF2l8QQ6QPM51qe7IHWJJRZf5UJ9s8HAGbfpVrw";
 
-    public static final String HOST = "localhost:3000";
-    public static final String ORIGIN = "http://localhost:3000";
-    public static final String BASE_URL = "http://localhost:3000/admin/api/resources";
+    public static final String HOST_IP = "http://172.22.48.1";
+    public static final String PORT = ":3000";
+    public static final String HOST = HOST_IP + PORT;
+    public static final String BASE_URL = HOST + "/admin/api/resources";
 
     // Login urls
-    public static final String POST_ADMIN_LOGIN_URL ="http://localhost:3000/admin/login";
+    public static final String POST_ADMIN_LOGIN_URL = HOST + "/admin/login";
 
     // Publisher urls
     public static final String POST_PUBLISHER_URL = BASE_URL + "/Publisher/actions/new";
