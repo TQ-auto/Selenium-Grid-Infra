@@ -8,7 +8,12 @@ pipeline {
                     url: 'https://github.com/TQ-auto/testing-app.git'
             }
         }
-
+        stage('Create docker network'){
+            steps{
+                sh 'docker network inspect shared-net >/dev/null 2>&1 || docker network create shared-net'
+            }
+        }
+        
         stage('Deploy JS App Image') {
             steps {
                     sh 'docker compose up -d'
