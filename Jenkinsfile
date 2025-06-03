@@ -4,7 +4,7 @@ pipeline {
         stage('Checkout js app') {
             steps {
                     git branch: 'main',
-                    credentialsId: 'unity-git-token',
+                    credentialsId: 'git-creds',
                     url: 'https://github.com/TQ-auto/testing-app.git'
             }
         }
@@ -19,7 +19,7 @@ pipeline {
         stage('Checkout app tests'){
             steps {
                     git branch: 'main',
-                    credentialsId: 'unity-git-token',
+                    credentialsId: 'git-creds',
                     url: 'https://github.com/TQ-auto/Unity-Task-Tests.git'
             }
         }
