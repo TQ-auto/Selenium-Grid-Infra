@@ -28,6 +28,7 @@ services:
       - DOCKER_TLS_VERIFY=1
     networks:
       - jenkins
+      - shared-net
     ports:
       - "8080:8080"
       - "50000:50000"
@@ -37,6 +38,8 @@ services:
 
 networks:
   jenkins:
+  shared-net:
+    external: true
 
 volumes:
   jenkins-docker-certs:
