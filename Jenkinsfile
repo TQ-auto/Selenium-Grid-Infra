@@ -21,18 +21,13 @@ pipeline {
                 }
         }
 
-        stage('Checkout app tests'){
+        stage('Checkout app tests + Selenium grid up'){
             steps {
                     git branch: 'main',
                     credentialsId: 'git-creds',
                     url: 'https://github.com/TQ-auto/Unity-Task-Tests.git'
-            }
-        }
-
-        stage('Start App & Selenium') {
-            steps {
-                sh 'docker-compose up -d'
-                sh 'sleep 30'
+                    sh 'docker-compose up -d'
+                    sh 'sleep 30'
             }
         }
 
