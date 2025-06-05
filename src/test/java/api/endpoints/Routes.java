@@ -10,7 +10,7 @@ package api.endpoints;
 
 public class Routes {
 
-    public static final String COOKIE = "adminjs=s%3AzMPvYK4Oy5zBaiLkeYWxf3ruIYgcFn51.kU9DCF2l8QQ6QPM51qe7IHWJJRZf5UJ9s8HAGbfpVrw";
+    public static final String COOKIE = "adminjs=s%3AZ-LfSKpaRJv_pN38Ui-xA1kzzT6HGxC2.OEqcWp84eDADTHDE6lp4DOGTRGlIytXmGO37f7fHiB8";
 
     public static final String HOST_IP = "http://172.18.0.7";
     public static final String PORT = ":3000";
