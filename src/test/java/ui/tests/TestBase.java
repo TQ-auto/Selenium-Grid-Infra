@@ -29,7 +29,6 @@ public abstract class TestBase {
     @BeforeTest
     @Parameters("browser")
     protected void setupTestBase(@Optional("chrome")String browser) throws Exception {
-        setLogger();
         DriverManager.initializeDriver(browser);
         if(getDriver() == null){
             throw new Exception("Driver was not initialized");
@@ -62,13 +61,5 @@ public abstract class TestBase {
                 java.time.LocalDateTime.now().atZone(ZoneId.systemDefault()).format(dateTimeFormatter),
                 testName);
         FileUtils.copyFile(scrFile,new File(fileName));
-    }
-
-    private void setLogger() throws IOException {
-        logger = Logger.getLogger("");
-        logger.setLevel(Level.INFO);
-        Arrays.stream(logger.getHandlers()).forEach(handler -> handler.setLevel(Level.INFO));
-        Handler handler = new FileHandler("selenium.xml");
-        logger.addHandler(handler);
     }
 }
