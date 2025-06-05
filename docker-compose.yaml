@@ -65,24 +65,6 @@ services:
       - GRID_BROWSER_TIMEOUT=300
       - GRID_TIMEOUT=300
 
-  docker:
-    image: docker:dind
-    container_name: jenkins-docker
-    privileged: true
-    restart: unless-stopped
-    environment:
-      - DOCKER_TLS_CERTDIR=/certs
-    networks:
-      jenkins:
-        aliases:
-          - docker
-      shared-net:
-    ports:
-      - "2376:2376"
-    volumes:
-      - jenkins-docker-certs:/certs/client
-      - jenkins-data:/var/jenkins_home
-
 networks:
   selenium-net:
   shared-net:
