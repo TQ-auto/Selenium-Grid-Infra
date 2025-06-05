@@ -25,7 +25,7 @@ pipeline {
                     git branch: 'main',
                     credentialsId: 'git-creds',
                     url: 'https://github.com/TQ-auto/Unity-Task-Tests.git'
-                    sh '/usr/local/bin/docker-compose up -d --no-recreate'
+                    sh 'docker compose up -d --no-recreate'
                     sh 'sleep 30'
             }
         }
