@@ -16,7 +16,7 @@ pipeline {
         
         stage('Deploy JS App Image') {
             steps {
-                    sh 'docker compose up -d'
+                    sh 'docker compose up -d --no-recreate'
                     sh 'sleep 45'
                 }
         }
@@ -26,7 +26,7 @@ pipeline {
                     git branch: 'main',
                     credentialsId: 'git-creds',
                     url: 'https://github.com/TQ-auto/Unity-Task-Tests.git'
-                    sh 'docker-compose up -d'
+                    sh 'docker-compose up -d --no-recreate'
                     sh 'sleep 30'
             }
         }
