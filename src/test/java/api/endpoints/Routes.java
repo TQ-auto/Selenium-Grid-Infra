@@ -12,7 +12,7 @@ public class Routes {
 
     public static final String COOKIE = "adminjs=s%3AzMPvYK4Oy5zBaiLkeYWxf3ruIYgcFn51.kU9DCF2l8QQ6QPM51qe7IHWJJRZf5UJ9s8HAGbfpVrw";
 
-    public static final String HOST_IP = "http://172.19.0.1";
+    public static final String HOST_IP = "http://172.18.0.7";
     public static final String PORT = ":3000";
     public static final String HOST = HOST_IP + PORT;
     public static final String BASE_URL = HOST + "/admin/api/resources";
