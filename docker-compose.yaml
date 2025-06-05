@@ -67,14 +67,21 @@ services:
 
   docker:
     image: docker:dind
-    container_name: dind
+    container_name: jenkins-docker
     privileged: true
+    restart: unless-stopped
     environment:
-      DOCKER_TLS_CERTDIR: ""
-    volumes:
-      - dind_storage:/var/lib/docker
+      - DOCKER_TLS_CERTDIR=/certs
     networks:
-      - shared-net
+      jenkins:
+        aliases:
+          - docker
+      shared-net:
+    ports:
+      - "2376:2376"
+    volumes:
+      - jenkins-docker-certs:/certs/client
+      - jenkins-data:/var/jenkins_home
 
 networks:
   selenium-net:
