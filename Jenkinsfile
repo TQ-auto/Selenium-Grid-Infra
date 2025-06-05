@@ -17,7 +17,6 @@ pipeline {
         stage('Deploy JS App Image') {
             steps {
                     sh 'docker compose up -d --no-recreate'
-                    sh 'sleep 45'
                 }
         }
 
@@ -31,7 +30,7 @@ pipeline {
             }
         }
 
-        stage('Run Selenium Tests') {
+        stage('Run Tests') {
             steps {
                 dir('selenium-tests') {
                     sh 'mvn clean test'

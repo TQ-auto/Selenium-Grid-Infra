@@ -65,6 +65,17 @@ services:
       - GRID_BROWSER_TIMEOUT=300
       - GRID_TIMEOUT=300
 
+  docker:
+    image: docker:dind
+    container_name: dind
+    privileged: true
+    environment:
+      DOCKER_TLS_CERTDIR: ""
+    volumes:
+      - dind_storage:/var/lib/docker
+    networks:
+      - shared-net
+
 networks:
   selenium-net:
   shared-net:
