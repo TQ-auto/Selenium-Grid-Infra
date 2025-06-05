@@ -35,9 +35,7 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                dir('selenium-tests') {
                     sh 'mvn clean test'
-                }
             }
         }
 
