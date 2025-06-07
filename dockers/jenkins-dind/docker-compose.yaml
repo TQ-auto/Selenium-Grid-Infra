@@ -28,8 +28,9 @@ services:
       - DOCKER_CERT_PATH=/certs/client
       - DOCKER_TLS_VERIFY=1
     networks:
-      - jenkins
-      - shared-net
+      shared-net:
+        ipv4_address: 172.18.0.10
+      jenkins:
     ports:
       - "8080:8080"
       - "50000:50000"
@@ -41,6 +42,11 @@ networks:
   jenkins:
   shared-net:
     external: true
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.18.0.0/16
+          gateway: 172.18.0.1
 
 volumes:
   jenkins-docker-certs:

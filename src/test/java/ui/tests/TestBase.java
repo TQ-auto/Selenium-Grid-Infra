@@ -13,18 +13,10 @@ import java.io.IOException;
 import java.time.Duration;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.logging.FileHandler;
-import java.util.logging.Handler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public abstract class TestBase {
 
-    String adminTestEmail = "admin@example.com";
-    String adminPassword = "password";
     WebDriverWait webdriverWait;
-    Logger logger;
 
     @BeforeTest
     @Parameters("browser")

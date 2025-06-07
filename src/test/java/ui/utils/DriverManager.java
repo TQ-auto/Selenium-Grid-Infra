@@ -1,6 +1,5 @@
 package ui.utils;
 
-import api.endpoints.Routes;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -11,20 +10,30 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.URL;
 
+import static generalutils.TestUtils.getPropertyValueFromPropertiesFile;
+import static generalutils.TestUtils.getResourcePath;
+
 public class DriverManager {
 
     private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     // Used for running UI tests on selenium grid
-    private static final String URL =  "http://172.18.0.4:4444/wd/hub";
+    private static String seleniumGridUrl;
     private static final boolean DEBUG_LOCALLY_FLAG = false;
-    private static final String CHROME_DRIVER_PATH = "\\src\\test\\resources\\chromedriver.exe";
-    private static final String EDGE_DRIVER_PATH = "\\src\\test\\resources\\msedgedriver.exe";
+    private static String ChromeDriverPath;
+    private static String EdgeDriverPath;
 
     public static void initializeDriver(String browser) throws Exception {
-        if(DEBUG_LOCALLY_FLAG)
+
+
+        if(DEBUG_LOCALLY_FLAG){
+            ChromeDriverPath = getResourcePath("chromedriver.exe");
+            EdgeDriverPath = getResourcePath("msedgedriver.exe");
             driver.set(getLocalDriverObject(browser));
-        else
+        }
+        else{
+            seleniumGridUrl =  "http://" + getPropertyValueFromPropertiesFile("selenium_hub_ip") + ":4444/wd/hub";
             driver.set(getRemoteDriverObject(browser));
+        }
     }
 
     public static WebDriver getDriver(){
@@ -34,13 +43,13 @@ public class DriverManager {
     private static WebDriver getLocalDriverObject(String browser) throws Exception {
         return switch (browser) {
             case "chrome" -> {
-                String path = System.getProperty("user.dir") + CHROME_DRIVER_PATH;
+                String path = System.getProperty("user.dir") + ChromeDriverPath;
                 System.setProperty("webdriver.chrome.driver", path);
                 ChromeOptions chromeOptions = new ChromeOptions();
                 yield new ChromeDriver(chromeOptions);
             }
             case "edge" -> {
-                String path = System.getProperty("user.dir") + EDGE_DRIVER_PATH;
+                String path = System.getProperty("user.dir") + EdgeDriverPath;
                 System.setProperty("webdriver.edge.driver", path);
                 EdgeOptions edgeOptions = new EdgeOptions();
                 yield new EdgeDriver(edgeOptions);
@@ -51,9 +60,9 @@ public class DriverManager {
 
     private static WebDriver getRemoteDriverObject(String browser) throws Exception {
         return switch (browser) {
-            case "chrome" ->  new RemoteWebDriver(new URL(URL), new ChromeOptions());
-            case "firefox" -> new RemoteWebDriver(new URL(URL), new FirefoxOptions());
-            case "edge" -> new RemoteWebDriver(new URL(URL), new EdgeOptions());
+            case "chrome" ->  new RemoteWebDriver(new URL(seleniumGridUrl), new ChromeOptions());
+            case "firefox" -> new RemoteWebDriver(new URL(seleniumGridUrl), new FirefoxOptions());
+            case "edge" -> new RemoteWebDriver(new URL(seleniumGridUrl), new EdgeOptions());
             default -> throw new Exception("Browser not supported for remote run.");
         };
     }

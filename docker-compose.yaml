@@ -57,8 +57,9 @@ services:
       - "4443:4443"
       - "4444:4444"
     networks:
-      - selenium-net
-      - shared-net
+      shared-net:
+        ipv4_address: 172.18.0.4
+      selenium-net:
     environment:
       - GRID_MAX_SESSION= 16
       - GRID_BROWSER_TIMEOUT=300
@@ -68,3 +69,8 @@ networks:
   selenium-net:
   shared-net:
     external: true
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.18.0.0/16
+          gateway: 172.18.0.1

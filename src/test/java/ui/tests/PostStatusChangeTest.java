@@ -7,6 +7,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ui.pagesactions.*;
 
+import java.io.IOException;
+
 import static generalutils.TestUtils.*;
 
 /**
@@ -21,7 +23,9 @@ import static generalutils.TestUtils.*;
 public class PostStatusChangeTest extends TestBase{
 
     @Test(description = "Add a publisher and a post with status active then change status to remove from post page")
-    public void addPublisherAndPost_ChangePostStatusToRemoved_Verify() {
+    public void addPublisherAndPost_ChangePostStatusToRemoved_Verify() throws IOException {
+        String adminTestEmail = getPropertyValueFromPropertiesFile("adminTestEmail");
+        String adminPassword = getPropertyValueFromPropertiesFile("adminPassword");
 
         // LOGIN TO ADMIN PAGE
         AdminPageActions adminPageActions = new LoginPageActions().navigate().login(adminTestEmail,adminPassword);

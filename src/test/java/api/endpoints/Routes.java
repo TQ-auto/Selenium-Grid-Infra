@@ -1,5 +1,9 @@
 package api.endpoints;
 
+import java.io.IOException;
+
+import static generalutils.TestUtils.getPropertyValueFromPropertiesFile;
+
 /**
  * Login: http://localhost:3000/admin/login
  * Create Publisher: http://localhost:3000/admin/api/resources/Publisher/actions/new
@@ -10,9 +14,26 @@ package api.endpoints;
 
 public class Routes {
 
-    public static final String COOKIE = "adminjs=s%3AZ-LfSKpaRJv_pN38Ui-xA1kzzT6HGxC2.OEqcWp84eDADTHDE6lp4DOGTRGlIytXmGO37f7fHiB8";
+    public static final String COOKIE;
 
-    public static final String HOST_IP = "http://172.18.0.8";
+    static {
+        try {
+            COOKIE = getPropertyValueFromPropertiesFile("request_cookie");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static final String HOST_IP;
+
+    static {
+        try {
+            HOST_IP = "http://" + getPropertyValueFromPropertiesFile("admin_app_ip");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static final String PORT = ":3000";
     public static final String HOST = HOST_IP + PORT;
     public static final String BASE_URL = HOST + "/admin/api/resources";

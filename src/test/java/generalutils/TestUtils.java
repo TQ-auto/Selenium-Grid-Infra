@@ -7,9 +7,13 @@ import api.payload.Post;
 import api.payload.Profile;
 import api.payload.Publisher;
 import enums.PostStatus;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.Properties;
 import java.util.Random;
 import java.util.Stack;
 
@@ -72,4 +76,19 @@ public class TestUtils {
             }
         }
     }
+
+    public static String getPropertyValueFromPropertiesFile(String property) throws IOException {
+        String rootPath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
+        String propsConfigPath = rootPath + "config.properties";
+
+        Properties props = new Properties();
+        props.load(new FileInputStream(propsConfigPath));
+
+        return props.getProperty(property);
+    }
+
+    public static String getResourcePath(String resource){
+        return Thread.currentThread().getContextClassLoader().getResource("").getPath() + resource;
+    }
+
 }
