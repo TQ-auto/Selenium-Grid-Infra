@@ -24,28 +24,35 @@ public class PostStatusChangeTest extends TestBase{
 
     @Test(description = "Add a publisher and a post with status active then change status to remove from post page")
     public void addPublisherAndPost_ChangePostStatusToRemoved_Verify() throws IOException {
+        logger.info("****** Starting PostStatusChangeTest ******");
+
         String adminTestEmail = getPropertyValueFromPropertiesFile("adminTestEmail");
         String adminPassword = getPropertyValueFromPropertiesFile("adminPassword");
 
         // LOGIN TO ADMIN PAGE
+        logger.info("Logging in to main page...");
         AdminPageActions adminPageActions = new LoginPageActions().navigate().login(adminTestEmail,adminPassword);
 
         // GO TO PUBLISHER PAGE
+        logger.info("Going to publisher page...");
         PublisherPageActions publisherPageActions =
                 adminPageActions.goToPublisherPage();
 
         // CREATE NEW PUBLISHER
+        logger.info("Creating new publisher...");
         Publisher publisherObject = getGeneratedPublisherDetails();
         publisherPageActions = publisherPageActions.createNewPublisher(publisherObject);
         publisherPageActions.clickCloseSuccessMessage();
 
         Post postObject = getGeneratedPostDetails();
         // CREATE NEW POST AND LINK TO THE PUBLISHER
+        logger.info("Going to post page...");
         PostPageActions postPageActions =
                 publisherPageActions.goToPostPage()
                         .createNewPost(postObject,publisherObject.getPublisherEmail());
 
         // CHANGE POST STATUS TO REMOVED
+        logger.info("Changing post status from active to removed...");
         PostShowPageActions postShowPageActions = postPageActions.clickOnLastAddedPost();
         String postId = postShowPageActions.getPostId();
         PostEditPageActions postEditPageActions = postShowPageActions.clickEditButton();

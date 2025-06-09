@@ -1,6 +1,8 @@
 package ui.tests;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -17,10 +19,13 @@ import java.time.format.DateTimeFormatter;
 public abstract class TestBase {
 
     WebDriverWait webdriverWait;
+    public Logger logger; //Log4j
 
     @BeforeTest
     @Parameters("browser")
     protected void setupTestBase(@Optional("chrome")String browser) throws Exception {
+        logger = LogManager.getLogger(this.getClass());
+        logger.info("****** Running test on browser: %s ******".formatted(browser));
         DriverManager.initializeDriver(browser);
         if(getDriver() == null){
             throw new Exception("Driver was not initialized");
