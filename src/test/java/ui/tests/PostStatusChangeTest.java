@@ -52,12 +52,14 @@ public class PostStatusChangeTest extends TestBase{
                         .createNewPost(postObject,publisherObject.getPublisherEmail());
 
         // CHANGE POST STATUS TO REMOVED
-        logger.info("Changing post status from active to removed...");
+        logger.info("Clicking on last added post in the table on posts page...");
         PostShowPageActions postShowPageActions = postPageActions.clickOnLastAddedPost();
         String postId = postShowPageActions.getPostId();
         PostEditPageActions postEditPageActions = postShowPageActions.clickEditButton();
+        logger.info("Changing post status to removed...");
         postPageActions = postEditPageActions.changePostStatus(PostStatus.REMOVED);
 
+        logger.info("Verifying post status equals to Removed in posts table...");
         //VALIDATE POST STATUS CHANGED IN POST PAGE
         Assert.assertEquals(
                 postPageActions.getStatusOfPostFromTable(postId),
