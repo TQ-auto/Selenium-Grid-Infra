@@ -1,6 +1,7 @@
 ## Prerequisites
 
 Install Docker if you don't have it: https://docs.docker.com/desktop/#download-and-install
+
 *It's neccessary to have the tested app up and running before (https://github.com/TQ-auto/testing-app.git)
 
 Create network:
