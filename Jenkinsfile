@@ -29,7 +29,7 @@ pipeline {
 
         stage('Run Performance tests'){
             steps {
-                sh '/opt/apache-jmeter-5.6.3/bin/jmeter.sh -Jmeter.saveservice.output_format=xml -n -t Jmeter-testplans/get-posts-list-test.jmx'
+                sh '/opt/apache-jmeter-5.6.3/bin/jmeter.sh -Jmeter.saveservice.output_format=xml -n -t Jmeter-testplans/get-posts-list-test.jmx -l results.csv -o output_results'
             }
         }
     }
