@@ -29,9 +29,7 @@ pipeline {
 
         stage('Run Performance tests'){
             steps {
-                sh 'cd /opt/apache-jmeter-5.6.3/bin'
-                //sh 'jmeter.sh -Jmeter.saveservice.output_format=xml -n -t /var/jenkins_home/workspace/performance-tests-unity/Jmeter-testplans/get-posts-list-test.jmx'
-                sh 'ls -l'
+                sh '/opt/apache-jmeter-5.6.3/bin/jmeter.sh -Jmeter.saveservice.output_format=xml -n -t /var/jenkins_home/workspace/performance-tests-unity/Jmeter-testplans/get-posts-list-test.jmx'
             }
         }
     }
