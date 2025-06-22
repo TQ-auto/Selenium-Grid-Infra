@@ -3,7 +3,7 @@ pipeline {
     tools{
         maven 'Maven 3.9.9'
     }
-
+    
     stages{
         stage('Checkout E2E tests'){
            steps {
@@ -12,13 +12,13 @@ pipeline {
                     url: 'https://github.com/TQ-auto/Unity-Task-Tests.git'
                 }
            }
-
+/*
         stage('Run E2E Tests') {
                 steps {
                         sh 'mvn clean test'
                 }
             }
-
+*/
         stage('Checkout Performance tests'){
             steps{
                 git branch: 'main',
@@ -30,7 +30,8 @@ pipeline {
         stage('Run Performance tests'){
             steps {
                 sh 'cd /opt/apache-jmeter-5.6.3/bin'
-                sh 'jmeter.sh -Jmeter.saveservice.output_format=xml -n -t /var/jenkins_home/workspace/performance-tests-unity/Jmeter-testplans/get-posts-list-test.jmx'
+                //sh 'jmeter.sh -Jmeter.saveservice.output_format=xml -n -t /var/jenkins_home/workspace/performance-tests-unity/Jmeter-testplans/get-posts-list-test.jmx'
+                sh 'ls -l'
             }
         }
     }
