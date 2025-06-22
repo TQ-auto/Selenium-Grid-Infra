@@ -5,7 +5,7 @@ pipeline {
     }
 
     stages{
-        stage('Checkout app tests'){
+        stage('Checkout E2E tests'){
            steps {
                 git branch: 'main',
                     credentialsId: 'git-creds',
@@ -13,10 +13,25 @@ pipeline {
                 }
            }
 
-        stage('Run Tests') {
+        stage('Run E2E Tests') {
                 steps {
                         sh 'mvn clean test'
                 }
             }
+
+        stage('Checkout Performance tests'){
+            steps{
+                git branch: 'main',
+                    credentialsId: 'git-creds',
+                    url: 'https://github.com/TQ-auto/performance-tests-unity.git'
+            }
+        }
+
+        stage('Run Performance tests'){
+            steps {
+                sh 'cd /opt/apache-jmeter-5.6.3/bin'
+                sh 'jmeter.sh -Jmeter.saveservice.output_format=xml -n -t /var/jenkins_home/workspace/performance-tests-unity/Jmeter-testplans/get-posts-list-test.jmx'
+            }
+        }
     }
 }
