@@ -22,7 +22,7 @@ public abstract class TestBase {
     WebDriverWait webdriverWait;
     public Logger logger; //Log4j
 
-    @BeforeMethod
+    @BeforeClass
     @Parameters("browser")
     protected void setupTestBase(@Optional("chrome")String browser) throws Exception {
         logger = LogManager.getLogger(this.getClass());
@@ -38,7 +38,7 @@ public abstract class TestBase {
         }
     }
 
-    @AfterMethod
+    @AfterClass
     protected void tearDown(){
         DriverManager.quitBrowser();
     }
