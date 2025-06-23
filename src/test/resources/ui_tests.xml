@@ -1,17 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="UiTests" parallel="classes">
-    <test name="Chrome tests">
+<suite name="UiTests" parallel="tests" thread-count="3" verbose="3">
+
+    <test name="Chrome test1">
         <parameter name="browser" value="chrome"/>
         <classes>
             <class name="ui.tests.PostStatusChangeTest"/>
+        </classes>
+    </test>
+
+    <test name="Chrome tests2">
+        <parameter name="browser" value="chrome"/>
+        <classes>
             <class name="ui.tests.ProfileChangeBioTest"/>
         </classes>
     </test>
-    <test name="Edge tests">
+
+    <test name="Edge tests1">
         <parameter name="browser" value="edge"/>
         <classes>
             <class name="ui.tests.PostStatusChangeTest"/>
+        </classes>
+    </test>
+
+    <test name="Edge tests2">
+        <parameter name="browser" value="edge"/>
+        <classes>
             <class name="ui.tests.ProfileChangeBioTest"/>
         </classes>
     </test>
