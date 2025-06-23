@@ -38,6 +38,11 @@ public class TestUtils {
         return new Publisher(publisherName,publisherEmail);
     }
 
+    public static Profile getGeneratedProfileDetails(String publisherEmail){
+        String bio = "biotest" + getEpochMili();
+        return new Profile(bio,publisherEmail);
+    }
+
     public static Post getGeneratedPostDetails(int publisherId){
         String postTitle = "test post"+ getEpochMili();
         String postContent = generateRandomString();

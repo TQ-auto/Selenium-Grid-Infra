@@ -7,6 +7,18 @@ public class Profile {
     String publisherEmail;
     String publisherId;
 
+    public Profile(int profileId, String bio, String publisherEmail, String publisherId){
+        this.profileId = profileId;
+        this.bio = bio;
+        this.publisherEmail = publisherEmail;
+        this.publisherId = publisherId;
+    }
+
+    public Profile(String bio,String publisherEmail){
+        this.bio = bio;
+        this.publisherEmail = publisherEmail;
+    }
+
     public int getProfileId() {
         return profileId;
     }

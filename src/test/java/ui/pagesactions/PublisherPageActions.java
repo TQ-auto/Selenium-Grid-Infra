@@ -48,11 +48,6 @@ public class PublisherPageActions extends ActionsBase {
         waitUntilSuccessMessageDisappears();
     }
 
-    public PostPageActions goToPostPage(){
-        TopBarActions topBarActions = new TopBarActions();
-        return topBarActions.openMenu().openHappyFolder().clickPostButton();
-    }
-
     @Override
     public void waitForPageToLoad() {
         webDriverWait.until(ExpectedConditions.presenceOfElementLocated(

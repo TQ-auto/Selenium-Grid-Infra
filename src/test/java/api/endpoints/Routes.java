@@ -28,7 +28,10 @@ public class Routes {
 
     static {
         try {
-            HOST_IP = "http://" + getPropertyValueFromPropertiesFile("admin_app_ip");
+            if(getPropertyValueFromPropertiesFile("run_locally").equals("false"))
+                HOST_IP = "http://" + getPropertyValueFromPropertiesFile("admin_app_ip");
+            else
+                HOST_IP = "http://localhost";
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

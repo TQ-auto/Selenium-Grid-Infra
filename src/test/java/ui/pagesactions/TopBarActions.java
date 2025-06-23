@@ -20,8 +20,9 @@ public class TopBarActions extends ActionsBase {
     }
 
     public void waitForPageToLoad() {
+        By burgerButtonLocator= By.xpath("//section[@data-css='topbar']/section[1]");
         webDriverWait.until(
-                ExpectedConditions.elementToBeClickable(
-                        By.xpath("//section[@data-css='topbar']/section[1]")));
+                ExpectedConditions.elementToBeClickable(burgerButtonLocator)
+        );
     }
 }

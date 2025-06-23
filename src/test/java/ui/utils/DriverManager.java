@@ -15,14 +15,13 @@ import static generalutils.TestUtils.getResourcePath;
 public class DriverManager {
 
     private static ThreadLocal<WebDriver> driver = new ThreadLocal<>(); // Used for running UI tests on selenium grid
-    private static final boolean DEBUG_LOCALLY_FLAG = false;
-    private static String url; // If DEBUG_LOCALLY_FLAG is true this will be localhost else it's selenium-hub ip on shared-net
+    private static String url;
     private static String chromeDriverPath;
     private static String edgeDriverPath;
 
     public static void initializeDriver(String browser) throws Exception {
 
-        if(DEBUG_LOCALLY_FLAG){
+        if(getPropertyValueFromPropertiesFile("run_locally").equals("true")){
             chromeDriverPath = getResourcePath("chromedriver.exe");
             edgeDriverPath = getResourcePath("msedgedriver.exe");
             driver.set(getLocalDriverObject(browser));

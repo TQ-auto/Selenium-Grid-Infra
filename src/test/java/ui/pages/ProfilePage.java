@@ -11,7 +11,7 @@ public class ProfilePage extends BasePage {
     private final String url = baseUrl + "/resources/Profile";
 
     @FindBy(how = How.XPATH, using = "//a[@href='/admin/resources/Profile/actions/new']")
-    WebElement createFirstRecordButtonHeader;
+    public WebElement createFirstRecordButtonHeader;
 
     public ProfilePage(WebDriver driver) {
         super(driver);

@@ -8,5 +8,17 @@ public abstract class ActionsBase {
 
     WebDriverWait webDriverWait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(10));
 
+    public PostPageActions goToPostPage(){
+        TopBarActions topBarActions = new TopBarActions();
+        topBarActions.waitForPageToLoad();
+        return topBarActions.openMenu().openHappyFolder().clickPostButton();
+    }
+
+    public ProfilePageActions goToProfilePage(){
+        TopBarActions topBarActions = new TopBarActions();
+        topBarActions.waitForPageToLoad();
+        return topBarActions.openMenu().openHappyFolder().clickProfileButton();
+    }
+
     public abstract void waitForPageToLoad();
 }
