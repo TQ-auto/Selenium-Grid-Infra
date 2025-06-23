@@ -1,20 +1,21 @@
 package ui.pagesactions;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import ui.pages.bars.TopBar;
-import ui.utils.DriverManager;
 
 public class TopBarActions extends ActionsBase {
 
     TopBar topBar;
 
-    public TopBarActions(){
-        this.topBar = new TopBar(DriverManager.getDriver());
+    public TopBarActions(WebDriver driver){
+        super(driver);
+        this.topBar = new TopBar(driver);
     }
     public LeftSideBarActions openMenu(){
         topBar.burgerMenuButton.click();
-        LeftSideBarActions leftSideBarActions = new LeftSideBarActions();
+        LeftSideBarActions leftSideBarActions = new LeftSideBarActions(driver);
         leftSideBarActions.waitForPageToLoad();
         return leftSideBarActions;
     }

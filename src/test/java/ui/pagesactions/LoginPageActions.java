@@ -1,15 +1,16 @@
 package ui.pagesactions;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import ui.pages.LoginPage;
-import ui.utils.DriverManager;
 
 public class LoginPageActions extends ActionsBase {
 
     LoginPage loginPage;
 
-    public LoginPageActions(){
-        this.loginPage = new LoginPage(DriverManager.getDriver());
+    public LoginPageActions(WebDriver driver){
+        super(driver);
+        this.loginPage = new LoginPage(driver);
     }
 
     public void enterEmail(String email){
@@ -24,7 +25,7 @@ public class LoginPageActions extends ActionsBase {
 
     public AdminPageActions clickLoginButton(){
         loginPage.loginButton.click();
-        AdminPageActions adminPageActions = new AdminPageActions();
+        AdminPageActions adminPageActions = new AdminPageActions(driver);
         adminPageActions.waitForPageToLoad();
         return adminPageActions;
     }
@@ -36,9 +37,9 @@ public class LoginPageActions extends ActionsBase {
     }
 
     public LoginPageActions navigate() {
-        DriverManager.getDriver().get(loginPage.getUrl());
+        driver.get(loginPage.getUrl());
         waitForPageToLoad();
-        return new LoginPageActions();
+        return new LoginPageActions(driver);
     }
 
     @Override

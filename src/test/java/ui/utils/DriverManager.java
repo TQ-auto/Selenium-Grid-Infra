@@ -14,27 +14,50 @@ import static generalutils.TestUtils.getResourcePath;
 
 public class DriverManager {
 
-    private static ThreadLocal<WebDriver> driver = new ThreadLocal<>(); // Used for running UI tests on selenium grid
+    private static volatile DriverManager instance;
+    private static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<>(); // Safe multi-thread running
     private static String url;
     private static String chromeDriverPath;
     private static String edgeDriverPath;
 
-    public static void initializeDriver(String browser) throws Exception {
+    private DriverManager(){}
 
+    public void initializeDriver(String browser) throws Exception {
         if(getPropertyValueFromPropertiesFile("run_locally").equals("true")){
             chromeDriverPath = getResourcePath("chromedriver.exe");
             edgeDriverPath = getResourcePath("msedgedriver.exe");
-            driver.set(getLocalDriverObject(browser));
+            tlDriver.set(getLocalDriverObject(browser));
             url = "http://localhost:3000";
         }
         else{
             url =  "http://" + getPropertyValueFromPropertiesFile("selenium_hub_ip") + ":4444/wd/hub";
-            driver.set(getRemoteDriverObject(browser));
+            tlDriver.set(getRemoteDriverObject(browser));
         }
     }
 
-    public static WebDriver getDriver(){
-        return driver.get();
+    public static DriverManager getInstance(String browser) throws Exception {
+        if(instance == null){
+            synchronized (DriverManager.class){
+                if(instance == null){
+                    instance = new DriverManager();
+                }
+            }
+        }
+        if(tlDriver.get() == null){
+            instance.initializeDriver(browser);
+        }
+        return instance;
+    }
+
+    public WebDriver getDriver(){
+        return tlDriver.get();
+    }
+
+    public static void quitBrowser(){
+        if(tlDriver.get() != null){
+            tlDriver.get().quit();
+            tlDriver.remove();
+        }
     }
 
     public static String getUrl(){
@@ -53,7 +76,7 @@ public class DriverManager {
                 EdgeOptions edgeOptions = new EdgeOptions();
                 yield new EdgeDriver(edgeOptions);
             }
-            default -> throw new Exception("Browser not supported for local run.");
+            default -> throw new IllegalArgumentException("Unsupported browser:" + browser);
         };
     }
 
@@ -62,7 +85,7 @@ public class DriverManager {
             case "chrome" ->  new RemoteWebDriver(new URL(url), new ChromeOptions());
             case "firefox" -> new RemoteWebDriver(new URL(url), new FirefoxOptions());
             case "edge" -> new RemoteWebDriver(new URL(url), new EdgeOptions());
-            default -> throw new Exception("Browser not supported for remote run.");
+            default -> throw new IllegalArgumentException("Unsupported browser:" + browser);
         };
     }
 

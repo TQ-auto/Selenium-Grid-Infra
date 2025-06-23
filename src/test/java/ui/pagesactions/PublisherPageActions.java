@@ -2,22 +2,23 @@ package ui.pagesactions;
 
 import api.payload.Publisher;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import ui.pages.PublisherPage;
-import ui.utils.DriverManager;
 
 public class PublisherPageActions extends ActionsBase {
 
     PublisherPage publisherPage;
 
-    public PublisherPageActions(){
-        publisherPage = new PublisherPage(DriverManager.getDriver());
+    public PublisherPageActions(WebDriver driver){
+        super(driver);
+        publisherPage = new PublisherPage(driver);
     }
 
 
     public NewPublisherCreationPageActions clickCreateFirstRecordButton(){
         publisherPage.createFirstRecordButtonHeader.click();
-        NewPublisherCreationPageActions newPublisherCreationPageActions = new NewPublisherCreationPageActions();
+        NewPublisherCreationPageActions newPublisherCreationPageActions = new NewPublisherCreationPageActions(driver);
         newPublisherCreationPageActions.waitForPageToLoad();
         return newPublisherCreationPageActions;
     }
@@ -31,7 +32,7 @@ public class PublisherPageActions extends ActionsBase {
         webDriverWait.until(ExpectedConditions.presenceOfElementLocated(xpathEmailCell));
 
         String xpathEmailVerification = "//section[@data-testid='property-list-email' and contains(text(),'%s')]".formatted(email);
-        return DriverManager.getDriver().findElements(By.xpath(xpathEmailVerification)).size() == 1;
+        return driver.findElements(By.xpath(xpathEmailVerification)).size() == 1;
     }
 
     public void waitUntilSuccessMessageDisappears(){
@@ -55,7 +56,7 @@ public class PublisherPageActions extends ActionsBase {
     }
 
     public void navigate() {
-        DriverManager.getDriver().get(publisherPage.getUrl());
+        driver.get(publisherPage.getUrl());
         waitForPageToLoad();
     }
 }

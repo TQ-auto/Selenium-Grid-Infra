@@ -1,15 +1,16 @@
 package ui.pagesactions;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import ui.pages.ProfileEditPage;
-import ui.utils.DriverManager;
 
 public class ProfileEditPageActions extends NewProfileCreationPageActions{
 
     ProfileEditPage profileEditPage;
 
-    public ProfileEditPageActions(){
-        this.profileEditPage = new ProfileEditPage(DriverManager.getDriver());
+    public ProfileEditPageActions(WebDriver driver){
+        super(driver);
+        this.profileEditPage = new ProfileEditPage(driver);
     }
 
     public ProfilePageActions changeProfileBio(String bio){
@@ -25,7 +26,7 @@ public class ProfileEditPageActions extends NewProfileCreationPageActions{
     }
 
     public void navigate(String profileId) {
-        DriverManager.getDriver().get(profileEditPage.getUrl().formatted(profileId));
+        driver.get(profileEditPage.getUrl().formatted(profileId));
         waitForPageToLoad();
     }
 }

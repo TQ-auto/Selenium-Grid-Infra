@@ -1,19 +1,20 @@
 package ui.pagesactions;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import ui.pages.AdminPage;
-import ui.utils.DriverManager;
 
 public class AdminPageActions extends ActionsBase {
 
     AdminPage adminPage;
 
-    public AdminPageActions(){
-        this.adminPage = new AdminPage(DriverManager.getDriver());
+    public AdminPageActions(WebDriver driver){
+        super(driver);
+        this.adminPage = new AdminPage(driver);
     }
 
     public PublisherPageActions goToPublisherPage(){
-        TopBarActions topBarActions = new TopBarActions();
+        TopBarActions topBarActions = new TopBarActions(driver);
         return topBarActions.openMenu().openHappyFolder().clickPublisherButton();
     }
 
@@ -23,7 +24,7 @@ public class AdminPageActions extends ActionsBase {
     }
 
     public void navigate() {
-        DriverManager.getDriver().get(adminPage.getUrl());
+        driver.get(adminPage.getUrl());
         waitForPageToLoad();
     }
 

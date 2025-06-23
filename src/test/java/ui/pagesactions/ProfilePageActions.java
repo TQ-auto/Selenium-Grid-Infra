@@ -2,19 +2,19 @@ package ui.pagesactions;
 
 import api.payload.Profile;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import ui.pages.ProfilePage;
-import ui.utils.DriverManager;
 
 public class ProfilePageActions extends ActionsBase{
 
     ProfilePage profilePage;
 
-    public ProfilePageActions() {
-        this.profilePage = new ProfilePage(DriverManager.getDriver());
+    public ProfilePageActions(WebDriver driver) {
+        super(driver);
+        this.profilePage = new ProfilePage(driver);
     }
-
 
     public ProfilePageActions createNewProfile(Profile profileObject) {
         return clickCreateFirstRecordButton().createNewProfile(profileObject);
@@ -22,7 +22,7 @@ public class ProfilePageActions extends ActionsBase{
 
     public NewProfileCreationPageActions clickCreateFirstRecordButton(){
         profilePage.createFirstRecordButtonHeader.click();
-        NewProfileCreationPageActions newProfileCreationPageActions = new NewProfileCreationPageActions();
+        NewProfileCreationPageActions newProfileCreationPageActions = new NewProfileCreationPageActions(driver);
         newProfileCreationPageActions.waitForPageToLoad();
         return newProfileCreationPageActions;
     }
@@ -31,7 +31,7 @@ public class ProfilePageActions extends ActionsBase{
         orderProfileTableAsc();
         By lastRowClickableCellLocator = By.cssSelector("tbody tr:first-child td:nth-child(2)");
         webDriverWait.until(ExpectedConditions.presenceOfElementLocated(lastRowClickableCellLocator)).click();
-        ProfileShowPageActions profileShowPageActions = new ProfileShowPageActions();
+        ProfileShowPageActions profileShowPageActions = new ProfileShowPageActions(driver);
         profileShowPageActions.waitForPageToLoad();
         return profileShowPageActions;
     }
@@ -47,7 +47,7 @@ public class ProfilePageActions extends ActionsBase{
 
     public String getBioOfProfileFromTable(int profileId){
         By profileRowLocator = By.cssSelector("tr[data-id='%s']".formatted(profileId));
-        WebElement profileRow = DriverManager.getDriver().findElement(profileRowLocator);
+        WebElement profileRow = driver.findElement(profileRowLocator);
         By bioLocator = By.cssSelector("section[data-testid='property-list-bio'");
         WebElement statusElement = profileRow.findElement(bioLocator);
         return statusElement.getText().strip();
@@ -60,7 +60,7 @@ public class ProfilePageActions extends ActionsBase{
     }
 
     public void navigate() {
-        DriverManager.getDriver().get(profilePage.getUrl());
+        driver.get(profilePage.getUrl());
         waitForPageToLoad();
     }
 }

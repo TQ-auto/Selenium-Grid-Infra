@@ -4,16 +4,17 @@ import api.payload.Post;
 import enums.PostStatus;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import ui.pages.NewPostCreationPage;
-import ui.utils.DriverManager;
 
 public class NewPostCreationPageActions extends ActionsBase{
 
     NewPostCreationPage newPostCreationPage;
 
-    public NewPostCreationPageActions(){
-        this.newPostCreationPage = new NewPostCreationPage(DriverManager.getDriver());
+    public NewPostCreationPageActions(WebDriver driver){
+        super(driver);
+        this.newPostCreationPage = new NewPostCreationPage(driver);
     }
 
     public void enterTitle(String title){
@@ -25,10 +26,10 @@ public class NewPostCreationPageActions extends ActionsBase{
         webDriverWait.until(ExpectedConditions.elementToBeClickable(newPostCreationPage.statusDropdown)).click();
         switch (postStatus){
             case ACTIVE:
-                DriverManager.getDriver().findElement(By.xpath("//div[contains(text(),'ACTIVE')]")).click();
+                driver.findElement(By.xpath("//div[contains(text(),'ACTIVE')]")).click();
                 break;
             case REMOVED:
-                DriverManager.getDriver().findElement(By.xpath("//div[contains(text(),'REMOVED')]")).click();
+                driver.findElement(By.xpath("//div[contains(text(),'REMOVED')]")).click();
                 break;
         }
     }
@@ -39,11 +40,11 @@ public class NewPostCreationPageActions extends ActionsBase{
 
     public void selectPublisher(String publisherEmail){
         newPostCreationPage.publisherDropDown.click();
-        DriverManager.getDriver().findElement(By.xpath("//div[contains(text(),'%s')]".formatted(publisherEmail))).click();
+        driver.findElement(By.xpath("//div[contains(text(),'%s')]".formatted(publisherEmail))).click();
     }
     public PostPageActions clickSaveButton(){
         newPostCreationPage.saveButton.click();
-        PostPageActions postPageActions = new PostPageActions();
+        PostPageActions postPageActions = new PostPageActions(driver);
         postPageActions.waitForPageToLoad();
         return postPageActions;
     }
@@ -103,7 +104,7 @@ public class NewPostCreationPageActions extends ActionsBase{
     }
 
     public void navigate() {
-        DriverManager.getDriver().get(newPostCreationPage.getUrl());
+        driver.get(newPostCreationPage.getUrl());
         waitForPageToLoad();
     }
 }

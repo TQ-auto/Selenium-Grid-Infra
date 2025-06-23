@@ -1,16 +1,17 @@
 package ui.pagesactions;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import ui.pages.PostShowPage;
-import ui.utils.DriverManager;
 
 public class PostShowPageActions extends ActionsBase{
 
     PostShowPage postShowPage;
 
-    public PostShowPageActions(){
-        this.postShowPage = new PostShowPage(DriverManager.getDriver());
+    public PostShowPageActions(WebDriver driver){
+        super(driver);
+        this.postShowPage = new PostShowPage(driver);
     }
 
     public String getPostId(){
@@ -19,7 +20,7 @@ public class PostShowPageActions extends ActionsBase{
 
     public PostEditPageActions clickEditButton(){
         postShowPage.editButton.click();
-        PostEditPageActions postEditPageActions = new PostEditPageActions();
+        PostEditPageActions postEditPageActions = new PostEditPageActions(driver);
         postEditPageActions.waitForPageToLoad();
         return postEditPageActions;
     }
@@ -35,7 +36,7 @@ public class PostShowPageActions extends ActionsBase{
     }
 
     public void navigate(String postId) {
-        DriverManager.getDriver().get(postShowPage.getUrl().formatted(postId));
+        driver.get(postShowPage.getUrl().formatted(postId));
         waitForPageToLoad();
     }
 }

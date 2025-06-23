@@ -2,26 +2,27 @@ package ui.pagesactions;
 
 import enums.PostStatus;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import ui.pages.PostEditPage;
-import ui.utils.DriverManager;
 
 public class PostEditPageActions extends NewPostCreationPageActions {
 
     PostEditPage postEditPage;
 
-    public PostEditPageActions(){
-        this.postEditPage = new PostEditPage(DriverManager.getDriver());
+    public PostEditPageActions(WebDriver driver){
+        super(driver);
+        this.postEditPage = new PostEditPage(driver);
     }
 
     public PostPageActions changePostStatus(PostStatus postStatus){
-        JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView(true);",postEditPage.statusDropdown);
         selectStatus(postStatus);
         return clickSaveButton();
     }
 
     public void navigate(String postId) {
-        DriverManager.getDriver().get(postEditPage.getUrl().formatted(postId));
+        driver.get(postEditPage.getUrl().formatted(postId));
         waitForPageToLoad();
     }
 }

@@ -2,17 +2,18 @@ package ui.pagesactions;
 
 import api.payload.Post;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import ui.pages.PostPage;
-import ui.utils.DriverManager;
 
 public class PostPageActions extends ActionsBase {
 
     PostPage postPage;
 
-    public PostPageActions(){
-        postPage = new PostPage(DriverManager.getDriver());
+    public PostPageActions(WebDriver driver){
+        super(driver);
+        postPage = new PostPage(driver);
     }
 
     public PostPageActions createNewPost(Post postObject, String publisherEmail){
@@ -23,7 +24,7 @@ public class PostPageActions extends ActionsBase {
     public NewPostCreationPageActions clickCreateFirstRecordButton(){
         postPage.createFirstRecordButtonHeader.click();
 
-        NewPostCreationPageActions newPostCreationPageActions = new NewPostCreationPageActions();
+        NewPostCreationPageActions newPostCreationPageActions = new NewPostCreationPageActions(driver);
         newPostCreationPageActions.waitForPageToLoad();
         return newPostCreationPageActions;
     }
@@ -32,7 +33,7 @@ public class PostPageActions extends ActionsBase {
         orderPostsTableAsc();
         By lastRowClickableCellLocator = By.cssSelector("tbody tr:first-child td:nth-child(2)");
         webDriverWait.until(ExpectedConditions.presenceOfElementLocated(lastRowClickableCellLocator)).click();
-        PostShowPageActions postShowPageActions = new PostShowPageActions();
+        PostShowPageActions postShowPageActions = new PostShowPageActions(driver);
         postShowPageActions.waitForPageToLoad();
         return postShowPageActions;
     }
@@ -48,7 +49,7 @@ public class PostPageActions extends ActionsBase {
 
     public String getStatusOfPostFromTable(String postId){
         By postRowLocator = By.cssSelector("tr[data-id='%s']".formatted(postId));
-        WebElement postRow = DriverManager.getDriver().findElement(postRowLocator);
+        WebElement postRow = driver.findElement(postRowLocator);
         By statusLocator = By.cssSelector("section[data-testid='property-list-status'");
         WebElement statusElement = postRow.findElement(statusLocator);
         return statusElement.getText().strip();
@@ -64,7 +65,7 @@ public class PostPageActions extends ActionsBase {
     }
 
     public void navigate() {
-        DriverManager.getDriver().get(postPage.getUrl());
+        driver.get(postPage.getUrl());
         waitForPageToLoad();
     }
 }

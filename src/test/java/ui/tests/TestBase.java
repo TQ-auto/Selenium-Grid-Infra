@@ -18,6 +18,7 @@ import java.time.format.DateTimeFormatter;
 
 public abstract class TestBase {
 
+    WebDriver driver;
     WebDriverWait webdriverWait;
     public Logger logger; //Log4j
 
@@ -26,27 +27,20 @@ public abstract class TestBase {
     protected void setupTestBase(@Optional("chrome")String browser) throws Exception {
         logger = LogManager.getLogger(this.getClass());
         logger.info("****** Running test on browser: %s ******".formatted(browser));
-        DriverManager.initializeDriver(browser);
-        if(getDriver() == null){
-            throw new Exception("Driver was not initialized");
-        }
-        webdriverWait = new WebDriverWait(getDriver(),Duration.ofSeconds(5));
+        driver = DriverManager.getInstance(browser).getDriver();
+        webdriverWait = new WebDriverWait(driver,Duration.ofSeconds(5));
     }
 
     @AfterMethod
     protected void takeScreenshotsOfFailedMethod(ITestResult result) throws IOException {
         if (result.getStatus() == ITestResult.FAILURE){
-            takeScreenshot(getDriver(), result.getName());
+            takeScreenshot(driver, result.getName());
         }
     }
 
     @AfterMethod
-    protected void wrapUp(){
-        getDriver().quit();
-    }
-
-    public WebDriver getDriver(){
-        return DriverManager.getDriver();
+    protected void tearDown(){
+        DriverManager.quitBrowser();
     }
 
     private void takeScreenshot(WebDriver driver, String testName) throws IOException {

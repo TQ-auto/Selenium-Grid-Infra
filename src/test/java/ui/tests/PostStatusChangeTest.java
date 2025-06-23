@@ -31,7 +31,7 @@ public class PostStatusChangeTest extends TestBase{
 
         // LOGIN TO ADMIN PAGE
         logger.info("Logging in to main page...");
-        AdminPageActions adminPageActions = new LoginPageActions().navigate().login(adminTestEmail,adminPassword);
+        AdminPageActions adminPageActions = new LoginPageActions(driver).navigate().login(adminTestEmail,adminPassword);
 
         // GO TO PUBLISHER PAGE
         logger.info("Going to publisher page...");

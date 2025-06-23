@@ -3,16 +3,17 @@ package ui.pagesactions;
 
 import api.payload.Profile;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import ui.pages.NewProfileCreationPage;
-import ui.utils.DriverManager;
 
 public class NewProfileCreationPageActions extends ActionsBase {
 
     NewProfileCreationPage newProfileCreationPage;
 
-    public NewProfileCreationPageActions(){
-        newProfileCreationPage = new NewProfileCreationPage(DriverManager.getDriver());
+    public NewProfileCreationPageActions(WebDriver driver){
+        super(driver);
+        newProfileCreationPage = new NewProfileCreationPage(driver);
     }
 
     public void enterBio(String bio){
@@ -22,12 +23,12 @@ public class NewProfileCreationPageActions extends ActionsBase {
 
     public void selectPublisher(String publisherEmail){
         newProfileCreationPage.publisherDropDown.click();
-        DriverManager.getDriver().findElement(By.xpath("//div[contains(text(),'%s')]".formatted(publisherEmail))).click();
+        driver.findElement(By.xpath("//div[contains(text(),'%s')]".formatted(publisherEmail))).click();
     }
 
     public ProfilePageActions clickSaveButton(){
         newProfileCreationPage.saveButton.click();
-        ProfilePageActions profilePageActions = new ProfilePageActions();
+        ProfilePageActions profilePageActions = new ProfilePageActions(driver);
         profilePageActions.waitForPageToLoad();
         return profilePageActions;
     }
@@ -49,7 +50,7 @@ public class NewProfileCreationPageActions extends ActionsBase {
     }
 
     public void navigate() {
-        DriverManager.getDriver().get(newProfileCreationPage.getUrl());
+        driver.get(newProfileCreationPage.getUrl());
         waitForPageToLoad();
     }
 }

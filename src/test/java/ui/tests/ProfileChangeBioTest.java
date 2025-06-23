@@ -32,7 +32,7 @@ public class ProfileChangeBioTest extends TestBase {
         String adminPassword = getPropertyValueFromPropertiesFile("adminPassword");
 
         logger.info("Login to admin page...");
-        AdminPageActions adminPageActions = new LoginPageActions().navigate().login(adminTestEmail,adminPassword);
+        AdminPageActions adminPageActions = new LoginPageActions(driver).navigate().login(adminTestEmail,adminPassword);
 
         logger.info("Navigate to publisher page...");
         PublisherPageActions publisherPageActions =

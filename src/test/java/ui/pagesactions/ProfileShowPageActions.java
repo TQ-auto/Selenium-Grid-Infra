@@ -1,16 +1,17 @@
 package ui.pagesactions;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import ui.pages.ProfileShowPage;
-import ui.utils.DriverManager;
 
 public class ProfileShowPageActions extends ActionsBase{
 
     ProfileShowPage profileShowPage;
 
-    public ProfileShowPageActions(){
-        this.profileShowPage = new ProfileShowPage(DriverManager.getDriver());
+    public ProfileShowPageActions(WebDriver driver){
+        super(driver);
+        this.profileShowPage = new ProfileShowPage(driver);
     }
 
     public String getProfileId(){
@@ -19,7 +20,7 @@ public class ProfileShowPageActions extends ActionsBase{
 
     public ProfileEditPageActions clickEditButton(){
         profileShowPage.editButton.click();
-        ProfileEditPageActions profileEditPageActions = new ProfileEditPageActions();
+        ProfileEditPageActions profileEditPageActions = new ProfileEditPageActions(driver);
         profileEditPageActions.waitForPageToLoad();
         return profileEditPageActions;
     }
@@ -35,7 +36,7 @@ public class ProfileShowPageActions extends ActionsBase{
     }
 
     public void navigate(String profileId) {
-        DriverManager.getDriver().get(profileShowPage.getUrl().formatted(profileId));
+        driver.get(profileShowPage.getUrl().formatted(profileId));
         waitForPageToLoad();
     }
 }

@@ -2,16 +2,17 @@ package ui.pagesactions;
 
 import api.payload.Publisher;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import ui.pages.NewPublisherCreationPage;
-import ui.utils.DriverManager;
 
 public class NewPublisherCreationPageActions extends ActionsBase{
 
     NewPublisherCreationPage newPublisherCreationPage;
 
-    public NewPublisherCreationPageActions(){
-        this.newPublisherCreationPage = new NewPublisherCreationPage(DriverManager.getDriver());
+    public NewPublisherCreationPageActions(WebDriver driver){
+        super(driver);
+        this.newPublisherCreationPage = new NewPublisherCreationPage(driver);
     }
 
     public void enterName(String name){
@@ -26,7 +27,7 @@ public class NewPublisherCreationPageActions extends ActionsBase{
 
     public PublisherPageActions clickSaveButton(){
         newPublisherCreationPage.saveButton.click();
-        PublisherPageActions publisherPageActions = new PublisherPageActions();
+        PublisherPageActions publisherPageActions = new PublisherPageActions(driver);
         publisherPageActions.waitForPageToLoad();
         return publisherPageActions;
     }
@@ -48,7 +49,7 @@ public class NewPublisherCreationPageActions extends ActionsBase{
     }
 
     public void navigate() {
-        DriverManager.getDriver().get(newPublisherCreationPage.getUrl());
+        driver.get(newPublisherCreationPage.getUrl());
         waitForPageToLoad();
     }
 }
