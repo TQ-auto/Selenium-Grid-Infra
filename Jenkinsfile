@@ -17,6 +17,7 @@ pipeline {
                         sh 'mvn clean test'
                 }
             }
+        /*
         stage('Checkout Performance tests'){
             steps{
                 git branch: 'main',
@@ -24,5 +25,12 @@ pipeline {
                     url: 'https://github.com/TQ-auto/performance-tests-unity.git'
             }
         }
+        
+        stage('Run Performance tests'){
+            steps {
+                sh '/opt/apache-jmeter-5.6.3/bin/jmeter.sh -Jmeter.saveservice.output_format=xml -n -t Jmeter-testplans/get-posts-list-performance-test.jmx -l results.csv -o output_results'
+            }
+        }
+        */
     }
 }
