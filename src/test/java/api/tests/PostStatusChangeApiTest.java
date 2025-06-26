@@ -1,5 +1,6 @@
 package api.tests;
 
+import api.endpoints.LoginEndPoints;
 import api.endpoints.PostEndPoints;
 import api.endpoints.PublisherEndPoints;
 import api.payload.Post;
@@ -26,22 +27,39 @@ import static generalutils.TestUtils.*;
 
 public class PostStatusChangeApiTest extends TestApiBase{
 
+    final String adminEmail = "admin@example.com";
+    final String adminPassword = "password";
+
     @Test
     public void addPublisherAndPost_ChangePostStatusToRemoved_Verify() throws IOException {
+        logger.info("**** Starting PostStatusChangeApiTest ****");
+        logger.info("Signing in...");
+        Response response = LoginEndPoints.login(adminEmail,adminPassword);
+        Assert.assertEquals(response.code(),200);
+        String responseBodyString = response.body().string();
+        Assert.assertTrue(responseBodyString.contains("root.render(AdminJS.Application)"));
+        logger.info("Logged in successfully.");
+
+        logger.info("Generating random publisher details...");
+
         // CREATE PUBLISHER
         Publisher publisherObject = getGeneratedPublisherDetails();
-
+        logger.info("Sending create publisher request...");
         Response creatPublisherResponse = PublisherEndPoints.createPublisher(publisherObject);
         publisherObject.setPublisherId(getEntityIdFromJson(creatPublisherResponse));
         deletionStack.push(publisherObject);
+        logger.info("Publisher created successfully.");
 
         // CREATE POST
+        logger.info("Sending create post request...");
         Post postObject = getGeneratedPostDetails(publisherObject.getPublisherId());
         Response createPostResponse = PostEndPoints.createPost(postObject);
         postObject.setPostId(getEntityIdFromJson(createPostResponse));
         deletionStack.push(postObject);
+        logger.info("Post created successfully.");
 
         // CHANGE POST STATUS TO REMOVED
+        logger.info("Editing post status from %s to %s...".formatted(postObject.getStatus(),PostStatus.REMOVED));
         postObject.setStatus(PostStatus.REMOVED);
         Response editPostResponse = PostEndPoints.editPost(postObject);
 
@@ -51,6 +69,8 @@ public class PostStatusChangeApiTest extends TestApiBase{
                 postStatusAfterEdit,
                 PostStatus.REMOVED.toString(),
                 "Post status was not changed to Removed.");
+
+        logger.info("Post status successfully changed from %s to %s".formatted(PostStatus.ACTIVE,PostStatus.REMOVED));
     }
 }
 
