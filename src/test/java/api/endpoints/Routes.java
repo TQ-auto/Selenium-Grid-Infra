@@ -46,6 +46,8 @@ public class Routes {
 
     // Publisher urls
     public static final String POST_PUBLISHER_URL = BASE_URL + "/Publisher/actions/new";
+    public static final String GET_PUBLISHER_URL = BASE_URL + "/Publisher/actions/{id}/show";
+    public static final String EDIT_PUBLISHER_URL = BASE_URL + "/Publisher/actions/{id}/edit";
     public static final String DELETE_PUBLISHER_URL = BASE_URL + "/Publisher/records/{id}/delete";
 
     //Profile urls

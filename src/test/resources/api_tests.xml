@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="API Tests">
+
+    <listeners>
+        <listener class-name="api.utils.ExtentReportManager"/>
+    </listeners>
+
     <test name="E2E api">
         <classes>
             <class name="api.tests.PostStatusChangeApiTest"/>
+        </classes>
+    </test>
+    <test name="Unit tests">
+        <classes>
+            <class name="api.tests.PublisherUnitTests"/>
         </classes>
     </test>
 </suite>
