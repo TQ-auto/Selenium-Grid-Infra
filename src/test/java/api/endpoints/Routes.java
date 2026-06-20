@@ -17,11 +17,7 @@ public class Routes {
     public static final String COOKIE;
 
     static {
-        try {
-            COOKIE = getPropertyValueFromPropertiesFile("request_cookie");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+            COOKIE = System.getProperty("request_cookie");
     }
 
     public static final String HOST_IP;
@@ -29,7 +25,7 @@ public class Routes {
     static {
         try {
             if(getPropertyValueFromPropertiesFile("run_locally").equals("false"))
-                HOST_IP = "http://" + getPropertyValueFromPropertiesFile("admin_app_ip");
+                HOST_IP = "http://" + System.getProperty("admin_app_ip");
             else
                 HOST_IP = "http://localhost";
         } catch (IOException e) {
