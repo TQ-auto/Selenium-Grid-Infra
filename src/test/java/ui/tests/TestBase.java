@@ -21,7 +21,10 @@ public abstract class TestBase {
     WebDriver driver;
     WebDriverWait webdriverWait;
     public Logger logger; //Log4j
-
+    Dotenv dotenv = Dotenv.configure()
+            .systemProperties()
+            .load();
+    
     @BeforeClass
     @Parameters("browser")
     protected void setupTestBase(@Optional("chrome")String browser) throws Exception {
