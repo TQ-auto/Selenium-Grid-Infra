@@ -26,8 +26,8 @@ public class PostStatusChangeTest extends TestBase{
     public void addPublisherAndPost_ChangePostStatusToRemoved_Verify() throws IOException {
         logger.info("****** Starting PostStatusChangeTest ******");
 
-        String adminTestEmail = getPropertyValueFromPropertiesFile("adminTestEmail");
-        String adminPassword = getPropertyValueFromPropertiesFile("adminPassword");
+        String adminTestEmail = System.getProperty("adminTestEmail");
+        String adminPassword = System.getProperty("adminPassword");
 
         // LOGIN TO ADMIN PAGE
         logger.info("Logging in to main page...");
