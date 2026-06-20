@@ -12,7 +12,9 @@ import java.util.Stack;
 public abstract class TestApiBase {
 
     Logger logger;
-
+    Dotenv dotenv = Dotenv.configure()
+            .systemProperties()
+            .load();
     // Saves objects to be deleted at the end of each test.
     Stack<Object> deletionStack = new Stack<>();
 
