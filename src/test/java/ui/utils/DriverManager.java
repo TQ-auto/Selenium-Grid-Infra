@@ -30,7 +30,7 @@ public class DriverManager {
             url = "http://localhost:3000";
         }
         else{
-            url =  "http://" + getPropertyValueFromPropertiesFile("selenium_hub_ip") + ":4444/wd/hub";
+            url =  "http://" + System.getProperty("selenium_hub_ip") + ":4444/wd/hub";
             tlDriver.set(getRemoteDriverObject(browser));
         }
     }
