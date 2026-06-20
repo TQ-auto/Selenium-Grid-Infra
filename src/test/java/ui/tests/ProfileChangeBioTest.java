@@ -27,9 +27,9 @@ public class ProfileChangeBioTest extends TestBase {
     public void profileChangeBioTest() throws IOException {
 
         logger.info("****** Starting ProfileChangeBioTest ******");
-
-        String adminTestEmail = getPropertyValueFromPropertiesFile("adminTestEmail");
-        String adminPassword = getPropertyValueFromPropertiesFile("adminPassword");
+        
+        String adminTestEmail = System.getProperty("adminTestEmail");
+        String adminPassword = System.getProperty("adminPassword");
 
         logger.info("Login to admin page...");
         AdminPageActions adminPageActions = new LoginPageActions(driver).navigate().login(adminTestEmail,adminPassword);
